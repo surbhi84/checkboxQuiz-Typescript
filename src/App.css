@@ -19,3 +19,7 @@
 .prim-text {
   color: var(--prim-col);
 }
+
+.bg-prim-li {
+  background-color: var(--prim-col-li);
+}

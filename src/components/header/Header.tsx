@@ -26,51 +26,52 @@ export const Header = () => {
           </Link>
         </div>
         {/* <!-- end of logo --> */}
+        <nav className="mg-left-auto">
+          <ul className="nav-links">
+            <li>
+              <button
+                className="themeBtn nav-link"
+                onClick={() => setTheme((p: Boolean) => !p)}
+              >
+                {lightTheme ? <MdDarkMode /> : <MdLightMode />}
+              </button>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link nav-link-active" : "nav-link"
+                }
+                to="/categories"
+              >
+                <b>Categories</b>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "nav-link nav-link-active" : "nav-link"
+                }
+                to="/highscores"
+              >
+                <b>High-Scores</b>
+              </NavLink>
+            </li>
 
-        <ul className="nav-links ">
-          <li>
-            <button
-              className="themeBtn nav-link"
-              onClick={() => setTheme((p: Boolean) => !p)}
-            >
-              {lightTheme ? <MdDarkMode /> : <MdLightMode />}
-            </button>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link nav-link-active" : "nav-link"
-              }
-              to="/categories"
-            >
-              <b>Categories</b>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link nav-link-active" : "nav-link"
-              }
-              to="/highscores"
-            >
-              <b>High-Scores</b>
-            </NavLink>
-          </li>
-
-          {/* <!-- Profile  --> */}
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive
-                  ? "nav-link nav-link-active outline-btn"
-                  : "nav-link outline-btn"
-              }
-              to="/profile"
-            >
-              <AiOutlineUser />
-            </NavLink>
-          </li>
-        </ul>
+            {/* <!-- Profile  --> */}
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link nav-link-active outline-btn"
+                    : "nav-link outline-btn"
+                }
+                to="/profile"
+              >
+                <AiOutlineUser />
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
       {/* <!-- end of header --> */}
     </div>
