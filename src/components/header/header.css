@@ -1,0 +1,50 @@
+.logo-icon {
+  height: 2rem;
+}
+
+.logo {
+  color: var(--prim-col);
+}
+
+.logo1 {
+  color: var(--blk);
+}
+
+.nav-head {
+  box-shadow: var(--shadow-subtle);
+}
+
+.nav-link {
+  padding: var(--spacing-2xs);
+  border-radius: 0.2rem;
+}
+
+.nav-link:hover {
+  background-color: var(--prim-col-li);
+  transition: background-color 1s;
+}
+
+.themeBtn {
+  background: none;
+  border: none;
+  font-size: larger;
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    gap: var(--spacing-4xs);
+    padding-left: 1rem;
+  }
+  body {
+    font-size: 0.75rem;
+  }
+  .nav-head {
+    padding: 0.5rem 0.7rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav-head {
+    padding: 0.4rem;
+  }
+}

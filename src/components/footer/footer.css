@@ -1,0 +1,19 @@
+.footer-list {
+  gap: var(--spacing-xs);
+  list-style: none;
+  padding-left: unset;
+}
+
+.footer-icon {
+  color: var(--prim-col);
+}
+
+.footer-link:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s;
+}
+
+.footer-space {
+  margin-bottom: 0%;
+  margin-top: auto;
+}
