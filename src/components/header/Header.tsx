@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useThemeContext } from "context/ThemeContext";
@@ -37,21 +37,38 @@ export const Header = () => {
             </button>
           </li>
           <li>
-            <Link className="nav-link" to="/categories">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link nav-link-active" : "nav-link"
+              }
+              to="/categories"
+            >
               <b>Categories</b>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link className="nav-link" to="/highscores">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "nav-link nav-link-active" : "nav-link"
+              }
+              to="/highscores"
+            >
               <b>High-Scores</b>
-            </Link>
+            </NavLink>
           </li>
 
           {/* <!-- Profile  --> */}
           <li>
-            <Link className="nav-link outline-btn" to="/profile">
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link nav-link-active outline-btn"
+                  : "nav-link outline-btn"
+              }
+              to="/profile"
+            >
               <AiOutlineUser />
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </header>

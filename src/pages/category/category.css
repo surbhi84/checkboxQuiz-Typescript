@@ -1,7 +1,6 @@
 .category-container {
   justify-content: center;
   align-items: center;
-  margin: var(--spacing-xl) 0 var(--spacing-xl);
 }
 
 @media (min-width: 780px) {
@@ -9,5 +8,11 @@
     flex-direction: row;
     min-height: 90vh;
     margin: unset;
+  }
+}
+
+@media (max-width: 640px) {
+  .category-container {
+    margin: 2rem 0;
   }
 }

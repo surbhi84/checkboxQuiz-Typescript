@@ -1,6 +1,6 @@
 .main {
   align-items: center;
-  margin: 2rem;
+  margin: 0 0.5rem;
 }
 
 .main-img {
@@ -33,6 +33,7 @@
 
 @media (min-width: 640px) {
   .main {
-    height: 75vh;
+    height: 80vh;
+    margin: 2rem;
   }
 }

@@ -10,7 +10,7 @@ export const Rules = () => {
   return (
     <>
       {/* <!-- Rules div --> */}
-      <div className="rules-div flex-col flex-center pd-m">
+      <div className="rules-div flex-col flex-center main text-just">
         <h2 className="prim-text marg-un">checkBox Rules</h2>
         {/* <!-- Rules --> */}
         <ol>
@@ -20,7 +20,7 @@ export const Rules = () => {
           </li>
           <li className="mg-xs">
             You will get 30 seconds for answering a easy level question, 45
-            seconds for a medium level question adn one minute for the hard
+            seconds for a medium level question and one minute for the hard
             level.
           </li>
           <li className="mg-xs">
@@ -33,7 +33,7 @@ export const Rules = () => {
         {/* <!-- end of rules --> */}
         <Link
           onClick={() => console.log("category:", category, "level:", level)}
-          to="/"
+          to="/rules"
           className="play-btn outline-btn text-dec-none med-text mg-s"
         >
           Lets go!
