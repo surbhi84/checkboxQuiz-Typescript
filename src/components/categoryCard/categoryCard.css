@@ -1,0 +1,24 @@
+.category-card {
+  width: 18rem;
+  max-height: 25rem;
+  padding: var(--spacing-xs);
+  border-radius: 0.2rem;
+  box-shadow: var(--shadow-subtle);
+}
+
+.category-card > img {
+  width: 98%;
+  max-height: 60%;
+}
+
+.play-btn {
+  padding: var(--spacing-3xs) var(--spacing-2xs);
+  color: var(--prim-col);
+  font-family: var(--ubuntu);
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-subtle);
+  transition: transform 0.1s;
+}

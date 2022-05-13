@@ -1,10 +1,9 @@
-import { Header, Footer } from "components";
+import { Link } from "react-router-dom";
 import "./home.css";
 
 export const Home = () => {
   return (
     <>
-      <Header />
       <main className="flex-center flex-row main">
         <img src="/assets/images/test.svg" className="main-img" />
         <div className="flex-col flex-center ">
@@ -16,15 +15,14 @@ export const Home = () => {
 
           <h2>Are you ready?</h2>
           <h1>Then lets begin!</h1>
-          <a
+          <Link
             className="outline-btn cta-btn med-text text-dec-none"
-            href="/pages/quizCategories/"
+            to="/categories"
           >
             Choose Category
-          </a>
+          </Link>
         </div>
       </main>
-      <Footer />
     </>
   );
 };
