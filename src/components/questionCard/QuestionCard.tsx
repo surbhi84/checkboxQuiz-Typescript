@@ -1,64 +1,35 @@
-import { useEffect, useRef, useState } from "react";
-
 export const QuestionCard = () => {
-  const [stopWatch, setStopwatch] = useState<number>(30);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
-  const [selected, setSelected] = useState<string>();
-
-  useEffect(() => {
-    let id = setInterval(() => setStopwatch((p: number) => p - 1), 1000);
-    console.log(id, "[]");
-    setIntervalId(id);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    if (stopWatch === 0) {
-      clearInterval(intervalId);
-    }
-  }, [stopWatch]);
-
   return (
-    <div className="flex-center flex-col main">
-      <div className="circle-avatar bg-prim-li mg-s pd-xs">{stopWatch}s</div>
-
-      <p className="med-text mg-xs">Q1-I am a question</p>
-      <div className="flex-col mg-xs">
+    <div className="flex-col mg-s">
+      <p className="marg-un heading-text  ">
+        Q1-I am a question that is very long indeed
+      </p>
+      <div className="flex-col flex-center mg-xs">
         <button
           className="pd-xs play-btn outline-btn mg-xs text-center"
-          onClick={() => setSelected("Option One")}
-          disabled={stopWatch === 0}
+          disabled={true}
         >
           Option One
         </button>
         <button
           className="pd-xs play-btn outline-btn mg-xs text-center"
-          onClick={() => setSelected("Option two")}
-          disabled={stopWatch === 0}
+          disabled={true}
         >
           Option two
         </button>
         <button
           className="pd-xs play-btn outline-btn mg-xs text-center"
-          onClick={() => setSelected("Option three")}
-          disabled={stopWatch === 0}
+          disabled={true}
         >
           Option three
         </button>
         <button
           className="pd-xs play-btn outline-btn mg-xs text-center"
-          onClick={() => setSelected("Option four")}
-          disabled={stopWatch === 0}
+          disabled={true}
         >
           Option four
         </button>
       </div>
-      <button
-        className="bg-prim-li play-btn outline-btn btn-md mg-s"
-        onClick={() => console.log(selected)}
-      >
-        Next
-      </button>
     </div>
   );
 };

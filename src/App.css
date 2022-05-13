@@ -16,6 +16,13 @@
   color: white;
 }
 
+/* utils */
+
+.heading-text {
+  font-weight: 500;
+  height: 1.4rem;
+}
+
 .prim-text {
   color: var(--prim-col);
 }
