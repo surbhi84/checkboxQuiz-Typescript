@@ -1,42 +1,43 @@
+import { useLocation, Link } from "react-router-dom";
+
 export const Rules = () => {
+  const location = useLocation();
+  const { category, level } = location.state as {
+    category: string;
+    level: string;
+  };
+
   return (
     <>
       {/* <!-- Rules div --> */}
       <div className="rules-div flex-col flex-center pd-m">
-        <h1 className="heading marg-un">checkBox Rules</h1>
+        <h2 className="prim-text marg-un">checkBox Rules</h2>
         {/* <!-- Rules --> */}
         <ol>
+          <li className="mg-xs">Each question is worth 10 points.</li>
           <li className="mg-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem,sdsds
-            voluptas?
+            Only one answer can be selected for each question.
           </li>
           <li className="mg-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisfsicing elit. Rem,
-            voluptas?
+            You will get 30 seconds for answering a easy level question, 45
+            seconds for a medium level question adn one minute for the hard
+            level.
           </li>
           <li className="mg-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem,
-            voluptas?
-          </li>
-          <li className="mg-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem,
-            voluptas?
-          </li>
-          <li className="mg-xs">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem,
-            voluptas?
+            There is no negative marking for wrong answers.
           </li>
         </ol>
         <label>
           <input type="checkbox" />I agree to checkBox Rules.
         </label>
         {/* <!-- end of rules --> */}
-        <a
-          href="/pages/quizQues/"
+        <Link
+          onClick={() => console.log("category:", category, "level:", level)}
+          to="/"
           className="play-btn outline-btn text-dec-none med-text mg-s"
         >
           Lets go!
-        </a>
+        </Link>
       </div>
       {/* <!-- end of rules div --> */}
     </>

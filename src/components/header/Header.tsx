@@ -37,7 +37,7 @@ export const Header = () => {
             </button>
           </li>
           <li>
-            <Link className="nav-link" to="/quizCategories">
+            <Link className="nav-link" to="/categories">
               <b>Categories</b>
             </Link>
           </li>

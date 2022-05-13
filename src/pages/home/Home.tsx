@@ -8,7 +8,7 @@ export const Home = () => {
         <img src="/assets/images/test.svg" className="main-img" />
         <div className="flex-col flex-center ">
           <h2 className="mg-sm">Welcome to checkBox,</h2>
-          <p className="med-text ">
+          <p className="med-text mg-xs">
             A quiz app specifically designed for developers to have fun and
             learn altogether.
           </p>

@@ -1,0 +1,13 @@
+.category-container {
+  justify-content: center;
+  align-items: center;
+  margin: var(--spacing-xl) 0 var(--spacing-xl);
+}
+
+@media (min-width: 780px) {
+  .category-container {
+    flex-direction: row;
+    min-height: 90vh;
+    margin: unset;
+  }
+}
