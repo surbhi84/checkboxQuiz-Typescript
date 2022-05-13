@@ -1,8 +1,9 @@
-import "./header.css";
 import { Link } from "react-router-dom";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useThemeContext } from "context/ThemeContext";
+import "./header.css";
+
 export const Header = () => {
   const { setTheme, lightTheme } = useThemeContext();
   return (
@@ -28,7 +29,6 @@ export const Header = () => {
 
         <ul className="nav-links ">
           <li>
-            {" "}
             <button
               className="themeBtn nav-link"
               onClick={() => setTheme((p: Boolean) => !p)}
@@ -38,7 +38,6 @@ export const Header = () => {
           </li>
           <li>
             <Link className="nav-link" to="/quizCategories">
-              {" "}
               <b>Categories</b>
             </Link>
           </li>

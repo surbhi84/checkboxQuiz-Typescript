@@ -31,15 +31,15 @@
 }
 
 @media (max-width: 640px) {
-  .nav-links {
-    gap: var(--spacing-4xs);
-    padding-left: 1rem;
-  }
   body {
     font-size: 0.75rem;
   }
   .nav-head {
     padding: 0.5rem 0.7rem;
+  }
+  .nav-links {
+    gap: var(--spacing-4xs);
+    padding-left: 1rem;
   }
 }
 

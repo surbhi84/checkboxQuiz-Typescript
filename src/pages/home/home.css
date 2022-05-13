@@ -1,3 +1,11 @@
+.main {
+  margin: 5%;
+}
+
+.main-img {
+  width: 40%;
+}
+
 .cta-btn {
   padding: var(--spacing-xs) var(--spacing-sm);
   color: var(--prim-col);
@@ -8,14 +16,6 @@
   transform: translateX(2%);
   box-shadow: var(--shadow-subtle);
   transition: transform 0.5s;
-}
-
-.main {
-  margin: 5%;
-}
-
-.main-img {
-  width: 40%;
 }
 
 @media (max-width: 640px) {

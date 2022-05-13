@@ -5,9 +5,7 @@ export const Home = () => {
   return (
     <>
       <Header />
-
       <main className="flex-center flex-row main">
-        {/* <div className=""> */}
         <img src="/assets/images/test.svg" className="main-img" />
         <div className="flex-col flex-center ">
           <h2 className="mg-sm">Welcome to checkBox,</h2>
@@ -25,7 +23,6 @@ export const Home = () => {
             Choose Category
           </a>
         </div>
-        {/* </div> */}
       </main>
       <Footer />
     </>
