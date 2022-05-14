@@ -15,3 +15,7 @@
   background-color: #414143;
   color: white;
 }
+
+.prim-text {
+  color: var(--prim-col);
+}

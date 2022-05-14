@@ -1,5 +1,6 @@
 .main {
-  margin: 5%;
+  align-items: center;
+  margin: 0 0.5rem;
 }
 
 .main-img {
@@ -27,5 +28,12 @@
 
   .main-img {
     width: 60%;
+  }
+}
+
+@media (min-width: 640px) {
+  .main {
+    height: 80vh;
+    margin: 2rem;
   }
 }

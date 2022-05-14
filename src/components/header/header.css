@@ -24,6 +24,11 @@
   transition: background-color 1s;
 }
 
+.nav-link-active {
+  background-color: var(--prim-col-li);
+  text-decoration: none;
+}
+
 .themeBtn {
   background: none;
   border: none;
