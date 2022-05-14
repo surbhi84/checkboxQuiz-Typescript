@@ -30,3 +30,7 @@
 .bg-prim-li {
   background-color: var(--prim-col-li);
 }
+
+.w-30 {
+  width: 30%;
+}

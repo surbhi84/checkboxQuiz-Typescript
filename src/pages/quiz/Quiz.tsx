@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Quiz = () => {
   const [stopWatch, setStopwatch] = useState<number>(30);
@@ -7,7 +8,6 @@ export const Quiz = () => {
 
   useEffect(() => {
     let id = setInterval(() => setStopwatch((p: number) => p - 1), 1000);
-    console.log(id, "[]");
     setIntervalId(id);
     return () => clearInterval(id);
   }, []);
@@ -58,12 +58,15 @@ export const Quiz = () => {
           </button>
         </div>
       </div>
-      <button
-        className="bg-prim-li play-btn outline-btn btn-md mg-s"
-        onClick={() => console.log(selected)}
-      >
-        Next
-      </button>
+      {/* implemented as link for now */}
+      <Link to={"/results"}>
+        <button
+          className="bg-prim-li play-btn outline-btn btn-md mg-s"
+          onClick={() => console.log(selected)}
+        >
+          Next
+        </button>
+      </Link>
     </div>
   );
 };
