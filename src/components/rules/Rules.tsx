@@ -33,7 +33,7 @@ export const Rules = () => {
         {/* <!-- end of rules --> */}
         <Link
           onClick={() => console.log("category:", category, "level:", level)}
-          to="/rules"
+          to="/quiz"
           className="play-btn outline-btn text-dec-none med-text mg-s"
         >
           Lets go!

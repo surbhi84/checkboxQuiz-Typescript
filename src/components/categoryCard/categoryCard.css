@@ -17,7 +17,7 @@
   font-family: var(--ubuntu);
 }
 
-.play-btn:hover {
+.play-btn:hover:enabled {
   transform: scale(1.05);
   box-shadow: var(--shadow-subtle);
   transition: transform 0.1s;
