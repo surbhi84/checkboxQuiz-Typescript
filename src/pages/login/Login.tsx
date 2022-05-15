@@ -16,7 +16,7 @@ export const Login = () => {
           <input
             type="text"
             className="w15"
-            onChange={(e) => e.target.value.test([\a-zA-Z\]) ? setLoginEmail(e.target.value) :}
+            onChange={(e) => setLoginEmail(e.target.value)}
           />
         </label>
         <label className="mg-xs flex-col">

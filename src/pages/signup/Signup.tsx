@@ -1,78 +1,19 @@
 import { useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { useSignupReducer } from "./signupReducer";
 
 export const Signup = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
-  const [passwd, setPasswd] = useState("");
+  const [isConfirmPwdVisible, setIsConfirmPwdVisible] = useState(false);
+  const [signupDetails, signupDispatch] = useSignupReducer();
 
-  function passwordHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.value === passwd) {
-      signupDispatch({ type: "PASSWORD", payload: e.target.value });
-    }
-    console.error("passwords don't match");
-  }
-
-  const initalSignupDetails = {
-    firstName: "",
-    lastName: "",
-    userName: "",
-    dob: "",
-    email: "",
-    contact: 384734387,
-    password: "",
-  };
-
-  interface SignupObject {
-    firstName: string;
-    lastName: string;
-    userName: string;
-    dob: string;
-    email: string;
-    contact: number;
-    password: string;
-  }
-
-  type SignupReducerActions =
-    | {
-        type:
-          | "FIRSTNAME"
-          | "LASTNAME"
-          | "USERNAME"
-          | "DOB"
-          | "EMAIL"
-          | "PASSWORD";
-        payload: string;
-      }
-    | { type: "CONTACT"; payload: number };
-
-  const signupReducer = (
-    state: SignupObject,
-    action: SignupReducerActions
-  ): SignupObject => {
-    switch (action.type) {
-      case "FIRSTNAME":
-        return { ...state, firstName: action.payload };
-      case "LASTNAME":
-        return { ...state, lastName: action.payload };
-      case "USERNAME":
-        return { ...state, userName: action.payload };
-      case "DOB":
-        return { ...state, dob: action.payload };
-      case "EMAIL":
-        return { ...state, email: action.payload };
-      case "CONTACT":
-        return { ...state, contact: action.payload };
-      case "PASSWORD":
-        return { ...state, password: action.payload };
-    }
-  };
-
-  const [signupDetails, signupDispatch] = useReducer(
-    signupReducer,
-    initalSignupDetails
-  );
-
+  //   console.log(
+  //     signupDetails.contact.toString().length,
+  //     signupDetails.password !== signupDetails.confirmPassword,
+  //     "pswds",
+  //     signupDetails.password === "" || signupDetails.confirmPassword === ""
+  //   );
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">
@@ -153,7 +94,9 @@ export const Signup = () => {
               <input
                 type={isPwdVisible ? "text" : "password"}
                 className="w15"
-                onChange={(e) => setPasswd(e.target.value)}
+                onChange={(e) =>
+                  signupDispatch({ type: "PASSWORD", payload: e.target.value })
+                }
               />
               {isPwdVisible ? (
                 <FaEyeSlash
@@ -172,18 +115,23 @@ export const Signup = () => {
             Confirm Password
             <div className="flex-row input-eye-holder">
               <input
-                type={isPwdVisible ? "text" : "password"}
+                type={isConfirmPwdVisible ? "text" : "password"}
                 className="w15"
-                onChange={(e) => passwordHandler(e)}
+                onChange={(e) =>
+                  signupDispatch({
+                    type: "CONFIRMPASSWORD",
+                    payload: e.target.value,
+                  })
+                }
               />
               {isPwdVisible ? (
                 <FaEyeSlash
-                  onClick={() => setIsPwdVisible((p) => !p)}
+                  onClick={() => setIsConfirmPwdVisible((p) => !p)}
                   className="pwd-eye prim-text"
                 />
               ) : (
                 <FaEye
-                  onClick={() => setIsPwdVisible((p) => !p)}
+                  onClick={() => setIsConfirmPwdVisible((p) => !p)}
                   className="pwd-eye prim-text"
                 />
               )}
@@ -193,6 +141,12 @@ export const Signup = () => {
         <button
           className="auth-btn border-prim mg-s"
           onClick={() => console.log(signupDetails)}
+          disabled={
+            signupDetails.password !== signupDetails.confirmPassword ||
+            signupDetails.password === "" ||
+            signupDetails.confirmPassword === "" ||
+            signupDetails.contact.toString().length !== 10
+          }
         >
           Signup
         </button>
