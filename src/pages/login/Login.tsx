@@ -1,6 +1,8 @@
-import "./login.css";
-import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+import "./login.css";
+
 export const Login = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
 
@@ -29,6 +31,10 @@ export const Login = () => {
           </div>
         </label>
         <button className="auth-btn border-prim mg-xs">Login</button>
+        <div className="small-text">or</div>
+        <Link to="/signup" className="text-dec-none prim-text">
+          Signup
+        </Link>
       </div>
       <img
         src="/assets/images/login.svg"

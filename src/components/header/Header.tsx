@@ -3,9 +3,11 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useThemeContext } from "context/ThemeContext";
 import "./header.css";
+import { useState } from "react";
 
 export const Header = () => {
   const { setTheme, lightTheme } = useThemeContext();
+  const [isAuth, setIsAuth] = useState(false);
   return (
     <div>
       {/* <!-- header --> */}
@@ -59,16 +61,29 @@ export const Header = () => {
 
             {/* <!-- Profile  --> */}
             <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "nav-link nav-link-active outline-btn"
-                    : "nav-link outline-btn"
-                }
-                to="/profile"
-              >
-                <AiOutlineUser />
-              </NavLink>
+              {isAuth ? (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "nav-link nav-link-active outline-btn"
+                      : "nav-link outline-btn"
+                  }
+                  to="/profile"
+                >
+                  <AiOutlineUser />
+                </NavLink>
+              ) : (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "nav-link nav-link-active outline-btn play-btn-style"
+                      : "nav-link outline-btn play-btn-style"
+                  }
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              )}
             </li>
           </ul>
         </nav>

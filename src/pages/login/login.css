@@ -1,11 +1,13 @@
 .auth-btn {
   padding: 0.3rem 0;
   width: 15rem;
+  background-color: white;
 }
 
 .auth-btn:hover {
   transform: scale(1.02);
   transition: transform 0.1s;
+  background-color: white;
 }
 
 .w15 {
