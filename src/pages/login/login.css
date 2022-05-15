@@ -1,0 +1,33 @@
+.auth-btn {
+  padding: 0.3rem 0;
+  width: 15rem;
+}
+
+.auth-btn:hover {
+  transform: scale(1.02);
+  transition: transform 0.1s;
+}
+
+.w15 {
+  width: 15rem;
+}
+
+.input-eye-holder {
+  position: relative;
+}
+
+.pwd-eye {
+  position: absolute;
+  right: 0.2ex;
+  padding: 0.2rem;
+}
+
+.input-div {
+  min-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .md-display-none {
+    display: none;
+  }
+}

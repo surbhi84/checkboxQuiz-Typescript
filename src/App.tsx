@@ -1,5 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import { Category, Home, Results, Quiz, UrlNotFound, Profile } from "./pages";
+import {
+  Category,
+  Home,
+  Results,
+  Quiz,
+  UrlNotFound,
+  Profile,
+  Login,
+} from "./pages";
 import { Header, Footer, Rules } from "components";
 import { useThemeContext } from "context/ThemeContext";
 import "./App.css";
@@ -19,6 +27,7 @@ function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/highscores" element={<Highscore />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
 
           <Route path="*" element={<UrlNotFound />} />
         </Routes>
