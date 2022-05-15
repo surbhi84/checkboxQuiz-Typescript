@@ -34,7 +34,7 @@ export const Rules = () => {
         <Link
           onClick={() => console.log("category:", category, "level:", level)}
           to="/quiz"
-          className="play-btn outline-btn text-dec-none med-text mg-s"
+          className="play-btn-style outline-btn text-dec-none med-text mg-s"
         >
           Lets go!
         </Link>

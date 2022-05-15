@@ -16,6 +16,10 @@
   color: white;
 }
 
+.bg-prim-li-hover:hover {
+  background-color: var(--prim-col-li);
+}
+
 /* utils */
 
 .heading-text {
@@ -43,8 +47,11 @@
   width: 80%;
 }
 
-.mt-xl {
+.mh-xl {
   margin: var(--spacing-3xl) 0;
+}
+.mh-l {
+  margin: var(--spacing-l) 0;
 }
 
 .mg-top-auto {
