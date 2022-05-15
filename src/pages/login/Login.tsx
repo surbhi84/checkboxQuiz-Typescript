@@ -9,7 +9,7 @@ export const Login = () => {
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">
-        <label className="mg-xs flex-col">
+        <label className="mg-xs flex-col ">
           Email
           <input type="text" className="w15" />
         </label>

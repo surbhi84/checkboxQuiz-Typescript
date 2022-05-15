@@ -7,6 +7,7 @@ import {
   UrlNotFound,
   Profile,
   Login,
+  Signup,
 } from "./pages";
 import { Header, Footer, Rules } from "components";
 import { useThemeContext } from "context/ThemeContext";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/highscores" element={<Highscore />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
           <Route path="*" element={<UrlNotFound />} />
         </Routes>
