@@ -17,21 +17,21 @@ export const CategoryCard = ({ category }: { category: string }) => {
       {/* <!-- redirecting links designed as buttons in category card --> */}
       <div className="flex-row gap-sm pd-xs">
         <Link
-          className="outline-btn play-btn text-dec-none"
+          className="outline-btn play-btn-style text-dec-none"
           to="/rules"
           state={{ category: category, level: "Easy" }}
         >
           Easy
         </Link>
         <Link
-          className="outline-btn play-btn text-dec-none"
+          className="outline-btn play-btn-style text-dec-none"
           to="/rules"
           state={{ category: category, level: "Medium" }}
         >
           Medium
         </Link>
         <Link
-          className="outline-btn play-btn text-dec-none"
+          className="outline-btn play-btn-style text-dec-none"
           to="/rules"
           state={{ category: category, level: "Hard" }}
         >
