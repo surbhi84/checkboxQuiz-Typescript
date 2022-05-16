@@ -1,4 +1,9 @@
+import { useDispatch } from "react-redux";
+import { setAuth } from "userRedux";
+
 export const Profile = () => {
+  const dispatch = useDispatch();
+
   return (
     <div className="mv-l">
       <div className="flex-center flex-col mg-s">
@@ -25,6 +30,15 @@ export const Profile = () => {
             <p className="heading-text">{i.value}</p>
           </div>
         ))}
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            dispatch(setAuth(false));
+          }}
+          className="play-btn-style outline-btn text-dec-none med-text mg-s"
+        >
+          Log out
+        </button>
       </div>
     </div>
   );
