@@ -13,6 +13,8 @@ import { Header, Footer, Rules } from "components";
 import { useThemeContext } from "context/ThemeContext";
 import "./App.css";
 import { Highscore } from "pages/highscore/Highscore";
+import Twopirest from "twopi-rest";
+import { sample_requests } from "backend/sample-requests";
 
 function App() {
   const { lightTheme } = useThemeContext();
@@ -30,6 +32,10 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/test"
+            element={<Twopirest preset={sample_requests} />}
+          />
 
           <Route path="*" element={<UrlNotFound />} />
         </Routes>

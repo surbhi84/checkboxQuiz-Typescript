@@ -6,6 +6,10 @@ import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeContextProvider } from "context/ThemeContext";
 
+import { makeServer } from "./backend/server";
+
+makeServer();
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
