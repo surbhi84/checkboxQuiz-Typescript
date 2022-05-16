@@ -4,10 +4,14 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useThemeContext } from "context/ThemeContext";
 import "./header.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "userRedux/store";
 
 export const Header = () => {
   const { setTheme, lightTheme } = useThemeContext();
-  const [isAuth, setIsAuth] = useState(false);
+  const isAuth = useSelector((state: RootState) => state.isAuth);
+  console.log(isAuth, "header isAuth value");
+
   return (
     <div>
       {/* <!-- header --> */}

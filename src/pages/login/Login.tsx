@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "userRedux";
+import { setAuth, setUser } from "userRedux";
 import { RootState } from "userRedux/store";
 
 import axios from "axios";
@@ -24,6 +24,7 @@ export const Login = () => {
     });
     console.log(response.data, "response");
     dispatch(setUser(response.data));
+    dispatch(setAuth(true));
     localStorage.setItem("token", response.data.encodedToken);
   }
 

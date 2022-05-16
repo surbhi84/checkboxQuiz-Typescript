@@ -15,9 +15,10 @@ import {
   Signup,
   Highscore,
 } from "./pages";
-import { Header, Footer, Rules } from "components";
+import { Header, Footer, Rules, LoggedInRoutes } from "components";
 import { sample_requests } from "backend/sample-requests";
-import { setUser } from "userRedux";
+import { setAuth, setUser } from "userRedux";
+import { useDispatch } from "react-redux";
 
 function App() {
   const { lightTheme } = useThemeContext();
@@ -32,9 +33,9 @@ function App() {
         const response = await axios.get("/user", {
           headers: { authorization: token as string },
         });
-
         dispatch(setUser(response.data));
-      }
+        dispatch(setAuth(true));
+      } else dispatch(setAuth(false));
     })();
   }, []);
 
@@ -45,11 +46,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/categories" element={<Category />} />
-          <Route path="/rules" element={<Rules />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/highscores" element={<Highscore />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<LoggedInRoutes />}>
+            <Route path="/rules" element={<Rules />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/results" element={<Results />} />
+            <Route path="/highscores" element={<Highscore />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
@@ -64,6 +67,5 @@ function App() {
     </>
   );
 }
-import { useDispatch } from "react-redux";
 
 export default App;
