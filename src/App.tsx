@@ -1,4 +1,9 @@
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import Twopirest from "twopi-rest";
+import axios from "axios";
+import { useThemeContext } from "context/ThemeContext";
+import "./App.css";
 import {
   Category,
   Home,
@@ -8,16 +13,31 @@ import {
   Profile,
   Login,
   Signup,
+  Highscore,
 } from "./pages";
 import { Header, Footer, Rules } from "components";
-import { useThemeContext } from "context/ThemeContext";
-import "./App.css";
-import { Highscore } from "pages/highscore/Highscore";
-import Twopirest from "twopi-rest";
 import { sample_requests } from "backend/sample-requests";
+import { setUser } from "userRedux";
 
 function App() {
   const { lightTheme } = useThemeContext();
+  const [isInitialRender, setIsInitialRender] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async function () {
+      setIsInitialRender(false);
+      let token = localStorage.getItem("token");
+      if (token !== null || token !== "") {
+        const response = await axios.get("/user", {
+          headers: { authorization: token as string },
+        });
+
+        dispatch(setUser(response.data));
+      }
+    })();
+  }, []);
+
   return (
     <>
       <div className={`${lightTheme ? "light" : "dark"} app`}>
@@ -44,5 +64,6 @@ function App() {
     </>
   );
 }
+import { useDispatch } from "react-redux";
 
 export default App;

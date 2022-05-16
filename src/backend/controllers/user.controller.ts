@@ -1,26 +1,11 @@
-import {
-  UserModel,
-  UserRaw,
-} from 'backend/interfaces';
-import sign from 'jwt-encode';
-import {
-  Registry,
-  Request,
-  Response,
-  Server,
-} from 'miragejs';
-import {
-  AnyFactories,
-  AnyModels,
-} from 'miragejs/-types';
-import Schema from 'miragejs/orm/schema';
-import { v4 as uuid } from 'uuid';
+import { UserModel, UserRaw } from "backend/interfaces";
+import sign from "jwt-encode";
+import { Registry, Request, Response, Server } from "miragejs";
+import { AnyFactories, AnyModels } from "miragejs/-types";
+import Schema from "miragejs/orm/schema";
+import { v4 as uuid } from "uuid";
 
-import {
-  getCurrentDateTime,
-  requiresAuth,
-  userResponse,
-} from '../utils';
+import { getCurrentDateTime, requiresAuth, userResponse } from "../utils";
 
 export const signupHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,
@@ -166,6 +151,7 @@ export const getUserHandler = function (
     );
   }
 };
+
 export const patchUserHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,
   schema: Schema<Registry<AnyModels, AnyFactories>>,

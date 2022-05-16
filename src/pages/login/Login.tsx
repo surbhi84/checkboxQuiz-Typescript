@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "userRedux";
+import { RootState } from "userRedux/store";
+
 import axios from "axios";
 import "./login.css";
 
@@ -8,6 +13,21 @@ export const Login = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
   const [loginUsername, setLoginUsername] = useState("sjtgshivam");
   const [loginPwd, setLoginPwd] = useState("acheDin");
+
+  const user = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
+
+  async function onclickLoginHandler(username: string, pwd: string) {
+    const response = await axios.post("/user/login", {
+      username: username,
+      password: pwd,
+    });
+    console.log(response.data, "response");
+    dispatch(setUser(response.data));
+    localStorage.setItem("token", response.data.encodedToken);
+  }
+
+  console.log(user, "user outside effect");
 
   return (
     <div className="flex-center mv-xl">
@@ -61,13 +81,3 @@ export const Login = () => {
     </div>
   );
 };
-
-async function onclickLoginHandler(username: string, pwd: string) {
-  const response = await axios.post("/user/login", {
-    username: username,
-    password: pwd,
-  });
-  console.log(response.data);
-
-  localStorage.setItem("token", response.data.encodedToken);
-}
