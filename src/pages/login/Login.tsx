@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import axios from "axios";
 import "./login.css";
 
 export const Login = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPwd, setLoginPwd] = useState("");
+  const [loginUsername, setLoginUsername] = useState("sjtgshivam");
+  const [loginPwd, setLoginPwd] = useState("acheDin");
 
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">
         <label className="mg-xs flex-col ">
-          Email
+          Username
           <input
             type="text"
             className="w15"
-            onChange={(e) => setLoginEmail(e.target.value)}
+            value={loginUsername}
+            onChange={(e) => setLoginUsername(e.target.value)}
           />
         </label>
         <label className="mg-xs flex-col">
@@ -25,6 +27,7 @@ export const Login = () => {
             <input
               type={isPwdVisible ? "text" : "password"}
               className="w15"
+              value={loginUsername}
               onChange={(e) => setLoginPwd(e.target.value)}
             />
             {isPwdVisible ? (
@@ -42,7 +45,7 @@ export const Login = () => {
         </label>
         <button
           className="auth-btn border-prim mg-xs"
-          onClick={() => console.log(loginEmail, loginPwd)}
+          onClick={() => onclickLoginHandler(loginUsername, loginPwd)}
         >
           Login
         </button>
@@ -58,3 +61,13 @@ export const Login = () => {
     </div>
   );
 };
+
+async function onclickLoginHandler(username: string, pwd: string) {
+  const response = await axios.post("/user/login", {
+    username: username,
+    password: pwd,
+  });
+  console.log(response.data);
+
+  localStorage.setItem("token", response.data.encodedToken);
+}
