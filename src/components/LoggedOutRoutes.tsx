@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Navigate, Outlet, Pathname, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { RootState } from "userRedux/store";
 
 export const LoggedOutRoutes = () => {

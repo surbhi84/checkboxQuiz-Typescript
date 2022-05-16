@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-interface SignupObject {
+export interface SignupObject {
   firstName: string;
   lastName: string;
   userName: string;

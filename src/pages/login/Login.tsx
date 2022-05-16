@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth, setUser } from "userRedux";
+import { loginHandler } from "updateHandlers";
 import { RootState } from "userRedux/store";
 
-import axios from "axios";
 import "./login.css";
 
 export const Login = () => {
@@ -16,17 +14,6 @@ export const Login = () => {
 
   const user = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-
-  async function onclickLoginHandler(username: string, pwd: string) {
-    const response = await axios.post("/user/login", {
-      username: username,
-      password: pwd,
-    });
-    console.log(response.data, "response");
-    dispatch(setUser(response.data));
-    dispatch(setAuth(true));
-    localStorage.setItem("token", response.data.encodedToken);
-  }
 
   console.log(user, "user outside effect");
 
@@ -66,7 +53,7 @@ export const Login = () => {
         </label>
         <button
           className="auth-btn border-prim mg-xs"
-          onClick={() => onclickLoginHandler(loginUsername, loginPwd)}
+          onClick={() => loginHandler(loginUsername, loginPwd, dispatch)}
         >
           Login
         </button>

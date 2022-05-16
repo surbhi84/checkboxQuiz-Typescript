@@ -7,3 +7,4 @@ export { HighscoreCard } from "./highscoreCard/HighscoreCard";
 export { LoggedInRoutes } from "./LoggedInRoutes";
 export { LoggedOutRoutes } from "./LoggedOutRoutes";
 export { Loader } from "./loader/Loader";
+export { AppRoutes } from "./AppRoutes";
