@@ -32,6 +32,7 @@ export const Rules = () => {
         </label>
         {/* <!-- end of rules --> */}
         <Link
+          // intentional console log
           onClick={() => console.log("category:", category, "level:", level)}
           to="/quiz"
           className="play-btn-style outline-btn text-dec-none med-text mg-s"

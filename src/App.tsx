@@ -14,7 +14,6 @@ function App() {
   useEffect(() => {
     (async function () {
       let token = localStorage.getItem("token");
-      console.log(token, "token");
       if (token !== null && token !== "") {
         try {
           tokenLoginHandler(token, dispatch);

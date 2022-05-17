@@ -60,10 +60,7 @@ export const Quiz = () => {
       </div>
       {/* implemented as link for now */}
       <Link to={"/results"}>
-        <button
-          className="bg-prim-li play-btn outline-btn btn-md mg-s"
-          onClick={() => console.log(selected)}
-        >
+        <button className="bg-prim-li play-btn outline-btn btn-md mg-s">
           Next
         </button>
       </Link>

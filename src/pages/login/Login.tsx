@@ -15,8 +15,6 @@ export const Login = () => {
   const user = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
-  console.log(user, "user outside effect");
-
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">

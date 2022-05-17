@@ -10,7 +10,6 @@ import { RootState } from "userRedux/store";
 export const Header = () => {
   const { setTheme, lightTheme } = useThemeContext();
   const isAuth = useSelector((state: RootState) => state.isAuth);
-  console.log(isAuth, "header isAuth value");
 
   return (
     <div>
