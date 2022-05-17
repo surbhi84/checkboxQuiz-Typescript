@@ -18,7 +18,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 70,
@@ -40,7 +40,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 60,
@@ -62,7 +62,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 50,
@@ -84,7 +84,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 45,
@@ -106,7 +106,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 43,
@@ -128,7 +128,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 42,
@@ -150,7 +150,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 41,
@@ -172,7 +172,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 40,
@@ -194,7 +194,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 30,
@@ -216,7 +216,7 @@ export const users: UserRaw[] = [
     quizPlayed: 10,
     recentlyPlayed: [
       { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
+      { categoryId: "11", level: "MED" },
       { categoryId: "11", level: "HARD" },
     ],
     correctAnswered: 20,

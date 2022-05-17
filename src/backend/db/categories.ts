@@ -10,7 +10,7 @@ export const categories: CategoryRaw[] = [
     tags: ["HTML"],
     timer_detail: [
       { level: "EASY", time: 30 },
-      { level: "MID", time: 60 },
+      { level: "MED", time: 60 },
       { level: "HARD", time: 90 },
     ],
   },
@@ -23,7 +23,7 @@ export const categories: CategoryRaw[] = [
     tags: ["HTML"],
     timer_detail: [
       { level: "EASY", time: 30 },
-      { level: "MID", time: 70 },
+      { level: "MED", time: 70 },
       { level: "HARD", time: 90 },
     ],
   },
@@ -36,7 +36,7 @@ export const categories: CategoryRaw[] = [
     tags: ["HTML"],
     timer_detail: [
       { level: "EASY", time: 30 },
-      { level: "MID", time: 70 },
+      { level: "MED", time: 70 },
       { level: "HARD", time: 90 },
     ],
   },

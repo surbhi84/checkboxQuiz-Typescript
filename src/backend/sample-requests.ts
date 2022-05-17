@@ -86,8 +86,8 @@ export const sample_requests: Array<{
     name: "qs",
     req_type: "GET",
     base_url: "",
-    url: "/qs",
-    query_str: "",
+    url: "/question",
+    query_str: "?tags=HTML,JS&lvl=EASY&length=5",
     body: {},
     header: {
       authorization:
@@ -95,10 +95,10 @@ export const sample_requests: Array<{
     },
   },
   {
-    name: "hs",
+    name: "highscore",
     req_type: "GET",
     base_url: "",
-    url: "/hs",
+    url: "/highscore",
     query_str: "",
     body: {},
     header: {

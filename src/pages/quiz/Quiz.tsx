@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 export const Quiz = () => {
   const [stopWatch, setStopwatch] = useState<number>(30);
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
   const [selected, setSelected] = useState<string>();
+  const location = useLocation();
 
   useEffect(() => {
     let id = setInterval(() => setStopwatch((p: number) => p - 1), 1000);
@@ -19,54 +20,71 @@ export const Quiz = () => {
   }, [stopWatch]);
 
   return (
-    <div className="flex-center flex-col mg-m">
-      <div className="circle-avatar bg-prim-li mg-s pd-xs">{stopWatch}s</div>
+    <>
+      {(location.state as { prev: string })?.prev === "/rules" ? (
+        <div className="flex-center flex-col mg-m">
+          <div className="circle-avatar bg-prim-li mg-s pd-xs">
+            {stopWatch}s
+          </div>
 
-      <div className="flex-col mg-xs flex-center">
-        <p className=" heading-text">
-          Q1-I am a question hasdjasdjakj ankjdsnda hdajksjdkas d oaijsdjasner
-          izxuciokzxj
-        </p>
-        <div className="flex-col gap-md">
-          <button
-            className="pd-xs play-btn outline-btn  text-center"
-            onClick={() => setSelected("Option One")}
-            disabled={stopWatch === 0}
-          >
-            Option One
-          </button>
-          <button
-            className="pd-xs play-btn outline-btn  text-center"
-            onClick={() => setSelected("Option two")}
-            disabled={stopWatch === 0}
-          >
-            Option two
-          </button>
-          <button
-            className="pd-xs play-btn outline-btn text-center"
-            onClick={() => setSelected("Option three")}
-            disabled={stopWatch === 0}
-          >
-            Option three
-          </button>
-          <button
-            className="pd-xs play-btn outline-btn  text-center"
-            onClick={() => setSelected("Option four")}
-            disabled={stopWatch === 0}
-          >
-            Option four
-          </button>
+          <div className="flex-col mg-xs flex-center">
+            <p className=" heading-text ">
+              Q1-I am a question hasdjasdjakj ankjdsnda hdajksjdkas d
+              oaijsdjasner izxuciokzxj
+            </p>
+            <div className="flex-col gap-md">
+              <button
+                className="pd-xs play-btn outline-btn  text-center"
+                onClick={() => setSelected("Option One")}
+                disabled={stopWatch === 0}
+              >
+                Option One
+              </button>
+              <button
+                className="pd-xs play-btn outline-btn  text-center"
+                onClick={() => setSelected("Option two")}
+                disabled={stopWatch === 0}
+              >
+                Option two
+              </button>
+              <button
+                className="pd-xs play-btn outline-btn text-center"
+                onClick={() => setSelected("Option three")}
+                disabled={stopWatch === 0}
+              >
+                Option three
+              </button>
+              <button
+                className="pd-xs play-btn outline-btn  text-center"
+                onClick={() => setSelected("Option four")}
+                disabled={stopWatch === 0}
+              >
+                Option four
+              </button>
+            </div>
+          </div>
+          <div>
+            <Link to={"/results"} state={{ prev: "/quiz" }} replace>
+              <button
+                className="bg-prim-li play-btn outline-btn btn-md mg-m"
+                onClick={() => console.log(selected)}
+              >
+                Quit
+              </button>
+            </Link>
+            <Link to={"/results"} state={{ prev: "/quiz" }} replace>
+              <button
+                className="bg-prim-li play-btn outline-btn btn-md mg-m"
+                onClick={() => console.log(selected)}
+              >
+                Next
+              </button>
+            </Link>
+          </div>
         </div>
-      </div>
-      {/* implemented as link for now */}
-      <Link to={"/results"}>
-        <button
-          className="bg-prim-li play-btn outline-btn btn-md mg-s"
-          onClick={() => console.log(selected)}
-        >
-          Next
-        </button>
-      </Link>
-    </div>
+      ) : (
+        <Navigate to="/" />
+      )}
+    </>
   );
 };

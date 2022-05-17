@@ -1,11 +1,26 @@
-import { UserModel, UserRaw } from "backend/interfaces";
-import sign from "jwt-encode";
-import { Registry, Request, Response, Server } from "miragejs";
-import { AnyFactories, AnyModels } from "miragejs/-types";
-import Schema from "miragejs/orm/schema";
-import { v4 as uuid } from "uuid";
+import {
+  UserModel,
+  UserRaw,
+} from 'backend/interfaces';
+import sign from 'jwt-encode';
+import {
+  Registry,
+  Request,
+  Response,
+  Server,
+} from 'miragejs';
+import {
+  AnyFactories,
+  AnyModels,
+} from 'miragejs/-types';
+import Schema from 'miragejs/orm/schema';
+import { v4 as uuid } from 'uuid';
 
-import { getCurrentDateTime, requiresAuth, userResponse } from "../utils";
+import {
+  getCurrentDateTime,
+  requiresAuth,
+  userResponse,
+} from '../utils';
 
 export const signupHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,
@@ -151,14 +166,11 @@ export const getUserHandler = function (
     );
   }
 };
-
 export const patchUserHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,
   schema: Schema<Registry<AnyModels, AnyFactories>>,
   request: Request
 ) {
-  console.log("in for a call");
-
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -189,26 +201,42 @@ export const patchUserHandler = function (
       if (!isNaN(Number(value)))
         Object.assign(updateObject, { [key]: Number(value) });
     }
-    // if(score){
-    // implement later
-    // }
-
     const updatedUser = this.db.users.update(
       { username: user.username },
       updateObject
     );
+    console.log(updatedUser[0]);
+    if (score !== undefined && score !== null && !isNaN(Number(score))) {
+      const highscores = [...this.db.highscores];
+      console.log(
+        [...highscores],
+        highscores.find((user) => true),
+        "yhan"
+      );
+      if (score > highscores.find((user) => user.rank === 10).score) {
+        this.db.highscores.remove({ rank: 10 });
 
-    console.log(
-      {
-        score,
-        quizPlayed,
-        recentlyPlayed,
-        correctAnswered,
-        incorrectAnswered,
-      },
-      updatedUser,
-      "updated user"
-    );
+        for (let i = 9; i >= 0; i--) {
+          if (
+            i != 0 &&
+            score > highscores.find((user) => user.rank === i).score
+          )
+            this.db.highscores.update({ rank: i }, { rank: i + 1 });
+          else {
+            console.log(44);
+            this.create("highscore", {
+              id: uuid(),
+              rank: i + 1,
+              username: user.username,
+              score: score,
+              userId: user.id, //need to check this later from functional point of view
+            });
+            break;
+          }
+        }
+      }
+    }
+    console.log(this.db.highscores, "final pro max");
 
     return new Response(200, {}, updatedUser);
   } catch (error) {

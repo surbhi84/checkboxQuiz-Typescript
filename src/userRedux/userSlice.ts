@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserRaw } from "backend/interfaces";
+import { UserResponse } from "backend/interfaces";
 
 interface userObject {
   encodedToken: string;
-  user: UserRaw;
+  user: UserResponse;
 }
 
 const initialState: userObject = {
@@ -13,22 +13,18 @@ const initialState: userObject = {
     fname: "",
     lname: "",
     username: "",
-    password: "",
     dob: "",
-    contact: 8057700000,
-    email: "rajv@gmail.com",
+    contact: NaN,
+    email: "",
     createdAt: "",
-    updatedAt: "",
-    score: 60,
-    quizPlayed: 10,
-    recentlyPlayed: [
-      { categoryId: "11", level: "EASY" },
-      { categoryId: "11", level: "MID" },
-      { categoryId: "11", level: "HARD" },
-    ],
-    correctAnswered: 60,
-    incorrectAnswered: 40,
-    role: "ADMIN",
+    score: 0,
+    quizPlayed: 0,
+    recentlyPlayed: [],
+    correctAnswered: 0,
+    incorrectAnswered: 0,
+    role: "PLAYER",
+    questionIds: [],
+    categoryIds: [],
   },
 };
 
