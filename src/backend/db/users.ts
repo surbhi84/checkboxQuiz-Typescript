@@ -1,17 +1,17 @@
-import { UserRaw } from 'backend/interfaces';
+import { UserRaw } from "backend/interfaces";
 
-import { getCurrentDateTime } from '../utils';
+import { getCurrentDateTime } from "../utils";
 
 export const users: UserRaw[] = [
   {
     id: "666",
-    fname: "Shivam",
-    lname: "Pandey",
-    username: "sjtgshivam",
+    fname: "Surbhi",
+    lname: "Kukreti",
+    username: "Surbhikukreti99",
     password: "acheDin",
     dob: "1997-03-07",
     contact: 8057700000,
-    email: "randomshivam@gmail.com",
+    email: "randoms@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
     score: 70,

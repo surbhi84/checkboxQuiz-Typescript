@@ -9,7 +9,7 @@ import "./login.css";
 
 export const Login = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
-  const [loginUsername, setLoginUsername] = useState("sjtgshivam");
+  const [loginUsername, setLoginUsername] = useState("Surbhikukreti99");
   const [loginPwd, setLoginPwd] = useState("acheDin");
 
   const user = useSelector((state: RootState) => state);
