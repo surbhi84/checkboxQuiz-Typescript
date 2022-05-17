@@ -47,13 +47,15 @@
   width: 80%;
 }
 
-.mh-xl {
+.mv-xl {
   margin: var(--spacing-3xl) 0;
 }
-.mh-l {
+.mv-l {
   margin: var(--spacing-l) 0;
 }
-
+.mt-sm {
+  margin-top: var(--spacing-md);
+}
 .mg-top-auto {
   margin-top: auto;
 }

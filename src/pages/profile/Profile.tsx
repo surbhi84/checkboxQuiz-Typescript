@@ -1,6 +1,6 @@
 export const Profile = () => {
   return (
-    <div className="mh-l">
+    <div className="mv-l">
       <div className="flex-center flex-col mg-s">
         <img
           src="/assets/images/HTML.jpg"
