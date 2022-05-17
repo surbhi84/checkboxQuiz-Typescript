@@ -1,14 +1,6 @@
-import {
-  Registry,
-  Request,
-  Response,
-  Server,
-} from 'miragejs';
-import {
-  AnyFactories,
-  AnyModels,
-} from 'miragejs/-types';
-import Schema from 'miragejs/orm/schema';
+import { Registry, Request, Response, Server } from "miragejs";
+import { AnyFactories, AnyModels } from "miragejs/-types";
+import Schema from "miragejs/orm/schema";
 
 export const getCategoriesHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,

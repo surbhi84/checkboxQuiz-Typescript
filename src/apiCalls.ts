@@ -33,3 +33,11 @@ export const userSignup = ({
     password,
   });
 };
+
+export const getHighscore = () => {
+  return axios.get("/highscore");
+};
+
+export const getCategories = () => {
+  return axios.get("/category");
+};

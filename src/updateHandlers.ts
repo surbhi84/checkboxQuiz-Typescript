@@ -25,6 +25,7 @@ export async function loginHandler(
   try {
     const response = await userLogin(username, pwd);
     dispatch(setUser(response.data));
+    console.log(response.data, "myresponse");
     dispatch(setAuth(true));
     localStorage.setItem("token", response.data.encodedToken);
   } catch (err) {

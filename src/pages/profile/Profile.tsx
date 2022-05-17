@@ -1,8 +1,13 @@
-import { useDispatch } from "react-redux";
-import { setAuth } from "userRedux";
+import { UserResponse } from "backend/interfaces";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth, setUser } from "userRedux";
+import { RootState } from "userRedux/store";
 
 export const Profile = () => {
   const dispatch = useDispatch();
+
+  const userInfo = useSelector((state: RootState) => state.currentUser.user);
 
   return (
     <div className="mv-l">
@@ -12,20 +17,26 @@ export const Profile = () => {
           alt="profile image"
           className="avatar-l circle-avatar"
         />
-        <p className="heading-text">Prerit Gupta</p>
+        <p className="heading-text">{userInfo?.fname}</p>
       </div>
 
       <div className="flex-center flex-col">
         <div className="flex-center spc-btwn w-30 w-50r bg-prim-li solid-btn ph-1 border-prim mg-xs">
           <p className="heading-text ">Recently played </p>
         </div>
-        {["HTML quiz", "CSS quiz"].map((item) => (
-          <div className="bg-prim-li-hover w-30 w-50r border-prim ph-1 mg-xs">
-            <p className="heading-text">{item}</p>
+        {userInfo?.recentlyPlayed.map((item) => (
+          <div
+            key={`${item.categoryId}+${item.level}`}
+            className="bg-prim-li-hover w-30 w-50r border-prim ph-1 mg-xs"
+          >
+            <p className="heading-text">{item.categoryId}</p>
           </div>
         ))}
         {dummyData.map((i) => (
-          <div className="flex-row spc-btwn w-30 w-50r border-prim ph-1 mg-xs">
+          <div
+            key={i.tag}
+            className="flex-row spc-btwn w-30 w-50r border-prim ph-1 mg-xs"
+          >
             <p className="heading-text">{i.tag}</p>
             <p className="heading-text">{i.value}</p>
           </div>

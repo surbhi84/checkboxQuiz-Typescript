@@ -1,24 +1,18 @@
-import {
-  belongsTo,
-  hasMany,
-  Model,
-  RestSerializer,
-  Server,
-} from 'miragejs';
+import { belongsTo, hasMany, Model, RestSerializer, Server } from "miragejs";
 
-import { getCategoriesHandler } from './controllers/category.controller';
-import { getHighscoresHandler } from './controllers/highsocre.controller';
-import { getQuestionsHandler } from './controllers/question.controller';
+import { getCategoriesHandler } from "./controllers/category.controller";
+import { getHighscoresHandler } from "./controllers/highsocre.controller";
+import { getQuestionsHandler } from "./controllers/question.controller";
 import {
   getUserHandler,
   loginHandler,
   patchUserHandler,
   signupHandler,
-} from './controllers/user.controller';
-import { categories } from './db/categories';
-import { highscores } from './db/highscores';
-import { questions } from './db/questions';
-import { users } from './db/users';
+} from "./controllers/user.controller";
+import { categories } from "./db/categories";
+import { highscores } from "./db/highscores";
+import { questions } from "./db/questions";
+import { users } from "./db/users";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
