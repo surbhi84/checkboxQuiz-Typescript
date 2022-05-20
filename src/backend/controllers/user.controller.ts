@@ -208,7 +208,7 @@ export const patchUserHandler = function (
     if (score !== undefined && score !== null && !isNaN(Number(score))) {
       const highscores = [...this.db.highscores];
       let presentUser = highscores.find((i) => i.username === user.username);
-      console.log(user, highscores, presentUser);
+
       if (score > highscores.find((user) => user.rank === 10).score) {
         if (presentUser !== undefined)
           this.db.highscores.remove({ rank: presentUser.rank });
