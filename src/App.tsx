@@ -1,40 +1,45 @@
-import { Routes, Route } from "react-router-dom";
-import {
-  Category,
-  Home,
-  Results,
-  Quiz,
-  UrlNotFound,
-  Profile,
-  Login,
-  Signup,
-} from "./pages";
-import { Header, Footer, Rules } from "components";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAuth } from "userRedux";
 import { useThemeContext } from "context/ThemeContext";
+import { Header, Footer, Loader, AppRoutes } from "components";
+import { tokenLoginHandler } from "updateHandlers";
 import "./App.css";
-import { Highscore } from "pages/highscore/Highscore";
 
 function App() {
   const { lightTheme } = useThemeContext();
+  const [isInitialRender, setIsInitialRender] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async function () {
+      let token = localStorage.getItem("token");
+      if (token !== null && token !== "") {
+        try {
+          tokenLoginHandler(token, dispatch);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsInitialRender(false);
+        }
+      } else {
+        dispatch(setAuth(false));
+        setIsInitialRender(false);
+      }
+    })();
+  }, []);
+
   return (
     <>
-      <div className={`${lightTheme ? "light" : "dark"} app`}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/categories" element={<Category />} />
-          <Route path="/rules" element={<Rules />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/highscores" element={<Highscore />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-
-          <Route path="*" element={<UrlNotFound />} />
-        </Routes>
-        <Footer />
-      </div>
+      {isInitialRender ? (
+        <Loader />
+      ) : (
+        <div className={`${lightTheme ? "light" : "dark"} app`}>
+          <Header />
+          <AppRoutes />
+          <Footer />
+        </div>
+      )}
     </>
   );
 }

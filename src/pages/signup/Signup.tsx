@@ -1,19 +1,16 @@
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useSignupReducer } from "./signupReducer";
+import { useDispatch } from "react-redux";
+import { signupHandler } from "updateHandlers";
 
 export const Signup = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
   const [isConfirmPwdVisible, setIsConfirmPwdVisible] = useState(false);
   const [signupDetails, signupDispatch] = useSignupReducer();
+  const dispatch = useDispatch();
 
-  //   console.log(
-  //     signupDetails.contact.toString().length,
-  //     signupDetails.password !== signupDetails.confirmPassword,
-  //     "pswds",
-  //     signupDetails.password === "" || signupDetails.confirmPassword === ""
-  //   );
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">
@@ -140,7 +137,7 @@ export const Signup = () => {
         </div>
         <button
           className="auth-btn border-prim mg-s"
-          onClick={() => console.log(signupDetails)}
+          onClick={() => signupHandler(signupDetails, dispatch)}
           disabled={
             signupDetails.password !== signupDetails.confirmPassword ||
             signupDetails.password === "" ||

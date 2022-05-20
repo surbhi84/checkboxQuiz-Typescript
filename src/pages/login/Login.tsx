@@ -1,22 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { loginHandler } from "updateHandlers";
+import { RootState } from "userRedux/store";
+
 import "./login.css";
 
 export const Login = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPwd, setLoginPwd] = useState("");
+  const [loginUsername, setLoginUsername] = useState("Surbhikukreti99");
+  const [loginPwd, setLoginPwd] = useState("acheDin");
+
+  const user = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
 
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">
         <label className="mg-xs flex-col ">
-          Email
+          Username
           <input
             type="text"
             className="w15"
-            onChange={(e) => setLoginEmail(e.target.value)}
+            value={loginUsername}
+            onChange={(e) => setLoginUsername(e.target.value)}
           />
         </label>
         <label className="mg-xs flex-col">
@@ -25,6 +33,7 @@ export const Login = () => {
             <input
               type={isPwdVisible ? "text" : "password"}
               className="w15"
+              value={loginUsername}
               onChange={(e) => setLoginPwd(e.target.value)}
             />
             {isPwdVisible ? (
@@ -42,7 +51,7 @@ export const Login = () => {
         </label>
         <button
           className="auth-btn border-prim mg-xs"
-          onClick={() => console.log(loginEmail, loginPwd)}
+          onClick={() => loginHandler(loginUsername, loginPwd, dispatch)}
         >
           Login
         </button>
