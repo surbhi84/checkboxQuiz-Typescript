@@ -9,6 +9,7 @@ export const Highscore = () => {
   useEffect(() => {
     (async function () {
       const response = await getHighscore();
+      console.log(response.data);
       setHighscores(response.data);
     })();
   }, []);

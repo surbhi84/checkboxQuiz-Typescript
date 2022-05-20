@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { QuestionModel } from "backend/interfaces";
+import { CategoryModel, QuestionModel } from "backend/interfaces";
+import { getCategories, getUser, patchUser } from "apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "userRedux/store";
+import { setUser } from "userRedux";
 
 export const QuestionCard = ({
   ques,
@@ -10,6 +14,9 @@ export const QuestionCard = ({
   quesNum,
   setQuesNum,
   questions,
+  category,
+  selectedArr,
+  setSelectedArr,
 }: {
   ques: QuestionModel;
   userScore: number;
@@ -17,11 +24,16 @@ export const QuestionCard = ({
   quesNum: number;
   setQuesNum: React.Dispatch<React.SetStateAction<number>>;
   questions: Array<QuestionModel>;
+  category: CategoryModel;
+  selectedArr: Array<string>;
+  setSelectedArr: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string>();
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
   const [stopWatch, setStopwatch] = useState<number>(30);
+  const userInfo = useSelector((state: RootState) => state.currentUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let id = setInterval(() => setStopwatch((p: number) => p - 1), 1000);
@@ -36,21 +48,49 @@ export const QuestionCard = ({
   }, [stopWatch]);
 
   function nextBtnHandler() {
+    setSelectedArr((p) => [...p, selected ?? "4"]);
     setQuesNum((p) => (p <= 5 ? p + 1 : p));
     setSelected("4");
     setStopwatch(30);
+
     if (selected === ques.correct_option) {
       setUserScore((p) => p + 5);
     }
   }
 
-  function quitBtnHandler() {
+  async function quitBtnHandler() {
+    let token = userInfo.encodedToken;
+    userScore = selected === ques.correct_option ? userScore + 5 : userScore;
+    let score = userInfo.user.score + userScore;
+    let quizPlayed =
+      quesNum > 0 ? userInfo.user.quizPlayed + 1 : userInfo.user.quizPlayed;
+
+    let level = ques.level;
+    let correctAnsQuiz = userScore / 5;
+    let correctAnswered = userInfo.user.correctAnswered + correctAnsQuiz;
+    let incorrectAnsQuiz = quesNum + 1 - correctAnsQuiz;
+    let incorrectAnswered = userInfo.user.incorrectAnswered + incorrectAnsQuiz;
+
+    const response = await patchUser(
+      token,
+      score,
+      quizPlayed,
+      category,
+      level,
+      correctAnswered,
+      incorrectAnswered
+    );
+
+    dispatch(setUser({ encodedToken: token, user: response.data.user[0] }));
+
     navigate("/results", {
       state: {
         prev: "/quiz",
-        userScore: selected === ques.correct_option ? userScore + 5 : userScore,
+        userScore: userScore,
         questionArray: questions,
         quesNum: quesNum,
+        selectedArr: [...selectedArr, selected],
+        // category:category,
       },
       replace: true,
     });
@@ -61,7 +101,7 @@ export const QuestionCard = ({
       <div className="circle-avatar bg-prim-li mg-s pd-xs">{stopWatch}s</div>
 
       {/* question  */}
-      <p className=" heading-text ">
+      <p className=" heading-text">
         Q{quesNum + 1}. {ques.statement}
       </p>
 
@@ -114,7 +154,7 @@ export const QuestionCard = ({
           className="bg-prim-li play-btn outline-btn btn-md mg-m"
           onClick={quitBtnHandler}
         >
-          {quesNum === questions.length - 1 ? "Next" : "Quit"}
+          {quesNum === questions.length - 1 ? "Show results" : "Quit"}
         </button>
 
         {/* next button */}

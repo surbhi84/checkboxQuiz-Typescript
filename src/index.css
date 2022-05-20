@@ -21,5 +21,6 @@ body {
 
   --ubuntu: "Ubuntu", sans-serif;
 
-  --green-li: #8ff18f;
+  --red-col: rgb(255, 181, 185);
+  --green-col: #8ff18f;
 }

@@ -1,18 +1,19 @@
+import { CategoryModel, Level } from "backend/interfaces";
 import { useLocation, Link, Navigate } from "react-router-dom";
 import "./rules.css";
 
 export const Rules = () => {
   const location = useLocation();
-  const { category = "", level = "" } =
+  const { category = {}, level = "" } =
     (location.state as {
-      category: string;
-      level: string;
+      category: CategoryModel;
+      level: Level;
     }) ?? {};
 
   return (
     <>
       {
-        category === "" || level === "" ? (
+        category === {} || level === "" ? (
           <Navigate to="/" />
         ) : (
           //  <!-- Rules div -->

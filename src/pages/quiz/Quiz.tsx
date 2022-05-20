@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "userRedux/store";
 
 import { getQuestions } from "apiCalls";
-import { QuestionModel } from "backend/interfaces";
+import { CategoryModel, Level, QuestionModel } from "backend/interfaces";
 import { QuestionCard } from "components";
 
 export const Quiz = () => {
@@ -12,8 +12,8 @@ export const Quiz = () => {
 
   const { category, level, prev } =
     (location.state as {
-      category: string;
-      level: string;
+      category: CategoryModel;
+      level: Level;
       prev: string;
     }) ?? {};
 
@@ -21,7 +21,7 @@ export const Quiz = () => {
   const [questions, setQuestions] = useState<Array<QuestionModel>>([]);
   const [quesNum, setQuesNum] = useState(0);
   const [userScore, setUserScore] = useState(0);
-
+  const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
   const user = useSelector((state: RootState) => state.currentUser);
 
   function onVisibiltyChange() {
@@ -31,6 +31,8 @@ export const Quiz = () => {
         userScore: userScore,
         questionArray: questions,
         quesNum: quesNum,
+        category: category,
+        selectedArr: selectedArr,
       },
     });
   }
@@ -53,7 +55,7 @@ export const Quiz = () => {
   useEffect(() => {
     (async function () {
       const response = await getQuestions(user.encodedToken, {
-        category: category,
+        category: category.title,
         level: level,
       });
       setQuestions(response.data.questions);
@@ -68,6 +70,9 @@ export const Quiz = () => {
       userScore={userScore}
       setUserScore={setUserScore}
       questions={questions}
+      category={category}
+      selectedArr={selectedArr}
+      setSelectedArr={setSelectedArr}
     />
   ));
 

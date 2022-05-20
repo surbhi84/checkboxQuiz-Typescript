@@ -151,6 +151,7 @@ export const getUserHandler = function (
     );
   }
 };
+
 export const patchUserHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,
   schema: Schema<Registry<AnyModels, AnyFactories>>,
@@ -185,16 +186,7 @@ export const patchUserHandler = function (
     for (let [key, value] of Object.entries(reqBody)) {
       if (!isNaN(Number(value)))
         Object.assign(updateObject, { [key]: Number(value) });
-      // console.log(
-      //   recentlyPlayed,
-      //   key === "recentlyPlayed",
-      //   recentlyPlayed?.categoryId !== undefined,
-      //   recentlyPlayed?.categoryId !== null,
-      //   recentlyPlayed?.level !== undefined,
-      //   recentlyPlayed?.level !== null,
-      //   typeof recentlyPlayed?.categoryId,
-      //   typeof recentlyPlayed?.level
-      // );
+
       const oldRecentlyPlayed = [
         ...this.db.users.findBy({ username: user.username }).recentlyPlayed,
       ];
@@ -215,10 +207,12 @@ export const patchUserHandler = function (
     );
     if (score !== undefined && score !== null && !isNaN(Number(score))) {
       const highscores = [...this.db.highscores];
-
+      let presentUser = highscores.find((i) => i.username === user.username);
+      console.log(user, highscores, presentUser);
       if (score > highscores.find((user) => user.rank === 10).score) {
-        this.db.highscores.remove({ rank: 10 });
-
+        if (presentUser !== undefined)
+          this.db.highscores.remove({ rank: presentUser.rank });
+        else this.db.highscores.remove({ rank: 10 });
         for (let i = 9; i >= 0; i--) {
           if (
             i != 0 &&

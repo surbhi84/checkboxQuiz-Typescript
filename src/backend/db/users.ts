@@ -69,7 +69,7 @@ export const users: UserRaw[] = [
         level: "HARD",
       },
     ],
-    correctAnswered: 70,
+    correctAnswered: 35,
     incorrectAnswered: 30,
     role: "ADMIN",
   },

@@ -35,9 +35,9 @@ export const Profile = () => {
           <p className="heading-text ">Recently played </p>
         </div>
 
-        {userInfo.recentlyPlayed.map((item) => (
+        {userInfo.recentlyPlayed.map((item, index) => (
           <div
-            key={item.category.id + item.level}
+            key={index}
             className="bg-prim-li-hover w-30 w-50r border-prim ph-1 mg-xs"
           >
             <p className="heading-text">

@@ -4,59 +4,62 @@ import { QuestionModel } from "backend/interfaces";
 
 export const Results = () => {
   const location = useLocation();
-  const { prev, userScore, questionArray, quesNum } =
+  const { prev, userScore, questionArray, quesNum, selectedArr } =
     (location.state as {
       prev: string;
       userScore: number;
       questionArray: Array<QuestionModel>;
       quesNum: number;
+      selectedArr: Array<string>;
     }) ?? {};
-
-  console.log(questionArray);
 
   return (
     <>
       {prev === "/quiz" ? (
         <div className="mg-m flex-center flex-col">
           <h3> Your SCORE: {userScore}/25</h3>
-          <div className="prim-text">Correct answers are highlighted</div>
+
           {questionArray
             .filter((p, index) => index <= quesNum)
-            .map((ques) => (
-              <div className="flex-col flex-center mg-s" key={ques.id}>
-                <p className="marg-un heading-text">{ques.statement}</p>
+            .map((ques, index) => (
+              <div className="flex-col flex-center mg-sm" key={ques.id}>
+                <p className="mg-xs heading-text">
+                  Q{index + 1}. {ques.statement}
+                </p>
                 <div className="flex-col flex-center mg-xs">
-                  <div
-                    className={`pd-xs play-btn outline-btn mg-xs text-center ${
-                      ques.correct_option === "0" ? "bg-prim-li" : ""
-                    } `}
-                  >
-                    {ques["0"]}
-                  </div>
-                  <div
-                    className={`pd-xs play-btn outline-btn mg-xs text-center ${
-                      ques.correct_option === "1" ? "bg-prim-li" : ""
-                    } `}
-                  >
-                    {ques["1"]}
-                  </div>
-                  <div
-                    className={`pd-xs play-btn outline-btn mg-xs text-center ${
-                      ques.correct_option === "2" ? "bg-prim-li" : ""
-                    } `}
-                  >
-                    {ques["2"]}
-                  </div>
-                  <div
-                    className={`pd-xs play-btn outline-btn mg-xs text-center  ${
-                      ques.correct_option === "3" ? "bg-prim-li" : ""
-                    } `}
-                  >
-                    {ques["3"]}
-                  </div>
+                  <>
+                    {(["0", "1", "2", "3"] as ["0", "1", "2", "3"]).map(
+                      (e, i) => {
+                        return (
+                          <div
+                            key={e}
+                            className={`pd-xs play-btn outline-btn mg-xs text-center ${
+                              ques.correct_option === selectedArr[index] &&
+                              ques.correct_option === e
+                                ? "bg-prim-li"
+                                : ques.correct_option === e
+                                ? "bg-green-col"
+                                : selectedArr[index] === e
+                                ? "bg-red-col"
+                                : ""
+                            } `}
+                          >
+                            {ques[e]}
+                          </div>
+                        );
+                      }
+                    )}
+                  </>
                 </div>
               </div>
             ))}
+          <ul className="prim-text">
+            <li>
+              Correct selected answers are highlighted in purple unless you
+              missed it then its green.
+            </li>
+            <li>Incorrect selected answers are highlighted in red.</li>
+          </ul>
         </div>
       ) : (
         <Navigate to="/" />

@@ -61,7 +61,7 @@ export const sample_requests: Array<{
     body: {},
     header: {
       authorization:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNqdGdzaGl2YW0ifQ.vzWhvz8B8qnFvMDCZ5euP7Dfh0cZLbCcoLsMdaraFQY",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cmJoaWt1a3JldGk5OSJ9.RGhSMsgXKhQe7cUhQ-4BF5EQKhJ_GDbuvMsgAx9noKU",
     },
   },
   {

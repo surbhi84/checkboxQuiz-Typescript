@@ -1,20 +1,13 @@
 import "./categoryCard.css";
 import { Link } from "react-router-dom";
-export const CategoryCard = ({
-  category,
-  description,
-  image,
-}: {
-  category: string;
-  description: string;
-  image: string;
-}) => {
+import { CategoryModel } from "backend/interfaces";
+export const CategoryCard = ({ category }: { category: CategoryModel }) => {
   return (
     <div className="category-card flex-col flex-center gap-sm">
-      <h2 className="marg-un sec-ff">{category}</h2>
-      <p className="mg-xs text-just">{description}</p>
+      <h2 className="marg-un sec-ff">{category.title}</h2>
+      <p className="mg-xs text-just">{category.description}</p>
       <img
-        src={image}
+        src={category.image}
         alt={`${category} category image`}
         className="responsive-img"
       />

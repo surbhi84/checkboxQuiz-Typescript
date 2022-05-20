@@ -18,17 +18,10 @@ export const Category = () => {
     })();
   }, []);
 
-  console.log(categories);
-
   return (
     <div className="category-container flex-col gap-xl">
       {categories?.map((item) => (
-        <CategoryCard
-          key={item.id}
-          category={item.title}
-          description={item.description}
-          image={item.image}
-        />
+        <CategoryCard key={item.id} category={item} />
       ))}
     </div>
   );

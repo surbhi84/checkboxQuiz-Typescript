@@ -32,6 +32,5 @@ export const shuffleArray = (a: Array<any>) => {
 };
 export const userResponse = (user: UserModel): UserResponse => {
   const { password, updatedAt, ...userResp } = user;
-  console.log(userResp, "userResponse");
   return userResp;
 };

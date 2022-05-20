@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   CategoryModel,
   HighscoresModel,
+  Level,
   QuestionModel,
   UserResponse,
 } from "backend/interfaces";
@@ -52,12 +53,39 @@ export const getCategories = () => {
 
 export const getQuestions = (
   token: string,
-  tag: { category: string; level: string }
+  tag: { category: string; level: Level }
 ) => {
   return axios.get<{ questions: Array<QuestionModel> }>(
     `/question?tags=${tag.category}&lvl=${tag.level}&length=${5}`,
     {
       headers: { authorization: token as string },
     }
+  );
+};
+
+export const patchUser = (
+  token: string,
+  score: number,
+  quizPlayed: number,
+  category: CategoryModel,
+  level: Level,
+  correctAnswered: number,
+  incorrectAnswered: number
+) => {
+  return axios.patch(
+    "/user",
+    {
+      score,
+      quizPlayed,
+      recentlyPlayed: [
+        {
+          category,
+          level,
+        },
+      ],
+      correctAnswered,
+      incorrectAnswered,
+    },
+    { headers: { authorization: token as string } }
   );
 };

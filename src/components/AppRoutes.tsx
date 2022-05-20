@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Twopirest from "twopi-rest";
 import { sample_requests } from "backend/sample-requests";
 import { Rules, LoggedInRoutes, LoggedOutRoutes } from "components";
@@ -17,6 +17,7 @@ import {
 export const AppRoutes = () => {
   return (
     <div>
+      <Link to="/test">Test</Link>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
