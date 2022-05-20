@@ -1,26 +1,11 @@
-import {
-  UserModel,
-  UserRaw,
-} from 'backend/interfaces';
-import sign from 'jwt-encode';
-import {
-  Registry,
-  Request,
-  Response,
-  Server,
-} from 'miragejs';
-import {
-  AnyFactories,
-  AnyModels,
-} from 'miragejs/-types';
-import Schema from 'miragejs/orm/schema';
-import { v4 as uuid } from 'uuid';
+import { UserModel, UserRaw } from "backend/interfaces";
+import sign from "jwt-encode";
+import { Registry, Request, Response, Server } from "miragejs";
+import { AnyFactories, AnyModels } from "miragejs/-types";
+import Schema from "miragejs/orm/schema";
+import { v4 as uuid } from "uuid";
 
-import {
-  getCurrentDateTime,
-  requiresAuth,
-  userResponse,
-} from '../utils';
+import { getCurrentDateTime, requiresAuth, userResponse } from "../utils";
 
 export const signupHandler = function (
   this: Server<Registry<AnyModels, AnyFactories>>,
@@ -155,7 +140,7 @@ export const getUserHandler = function (
       );
     }
 
-    return new Response(200, {}, user);
+    return new Response(200, {}, { user });
   } catch (error) {
     return new Response(
       500,
@@ -200,19 +185,37 @@ export const patchUserHandler = function (
     for (let [key, value] of Object.entries(reqBody)) {
       if (!isNaN(Number(value)))
         Object.assign(updateObject, { [key]: Number(value) });
+      // console.log(
+      //   recentlyPlayed,
+      //   key === "recentlyPlayed",
+      //   recentlyPlayed?.categoryId !== undefined,
+      //   recentlyPlayed?.categoryId !== null,
+      //   recentlyPlayed?.level !== undefined,
+      //   recentlyPlayed?.level !== null,
+      //   typeof recentlyPlayed?.categoryId,
+      //   typeof recentlyPlayed?.level
+      // );
+      const oldRecentlyPlayed = [
+        ...this.db.users.findBy({ username: user.username }).recentlyPlayed,
+      ];
+      const newRecentlyPlayed = [];
+
+      if (key === "recentlyPlayed") {
+        if (oldRecentlyPlayed.length === 3) {
+          recentlyPlayed.unshift(oldRecentlyPlayed[1], oldRecentlyPlayed[2]);
+        } else {
+          recentlyPlayed.unshift(...oldRecentlyPlayed);
+        }
+        Object.assign(updateObject, { [key]: recentlyPlayed });
+      }
     }
     const updatedUser = this.db.users.update(
       { username: user.username },
       updateObject
     );
-    console.log(updatedUser[0]);
     if (score !== undefined && score !== null && !isNaN(Number(score))) {
       const highscores = [...this.db.highscores];
-      console.log(
-        [...highscores],
-        highscores.find((user) => true),
-        "yhan"
-      );
+
       if (score > highscores.find((user) => user.rank === 10).score) {
         this.db.highscores.remove({ rank: 10 });
 
@@ -223,7 +226,6 @@ export const patchUserHandler = function (
           )
             this.db.highscores.update({ rank: i }, { rank: i + 1 });
           else {
-            console.log(44);
             this.create("highscore", {
               id: uuid(),
               rank: i + 1,
@@ -236,9 +238,8 @@ export const patchUserHandler = function (
         }
       }
     }
-    console.log(this.db.highscores, "final pro max");
 
-    return new Response(200, {}, updatedUser);
+    return new Response(200, {}, { user: updatedUser });
   } catch (error) {
     return new Response(
       500,

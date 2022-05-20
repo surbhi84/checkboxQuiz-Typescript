@@ -9,13 +9,11 @@ import "./login.css";
 
 export const Login = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
-  const [loginUsername, setLoginUsername] = useState("sjtgshivam");
+  const [loginUsername, setLoginUsername] = useState("Surbhikukreti99");
   const [loginPwd, setLoginPwd] = useState("acheDin");
 
   const user = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-
-  console.log(user, "user outside effect");
 
   return (
     <div className="flex-center mv-xl">
@@ -35,7 +33,7 @@ export const Login = () => {
             <input
               type={isPwdVisible ? "text" : "password"}
               className="w15"
-              value={loginUsername}
+              value={loginPwd}
               onChange={(e) => setLoginPwd(e.target.value)}
             />
             {isPwdVisible ? (

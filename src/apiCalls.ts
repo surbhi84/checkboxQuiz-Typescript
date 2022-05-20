@@ -1,14 +1,22 @@
 import axios from "axios";
+import {
+  CategoryModel,
+  HighscoresModel,
+  QuestionModel,
+  UserResponse,
+} from "backend/interfaces";
+import { Category } from "pages";
 import { SignupObject } from "pages/signup/signupReducer";
+import { userObject } from "userRedux/userSlice";
 
 export const getUser = (token: string) => {
-  return axios.get("/user", {
+  return axios.get<{ user: UserResponse }>("/user", {
     headers: { authorization: token as string },
   });
 };
 
 export const userLogin = (username: string, pwd: string) => {
-  return axios.post("/user/login", {
+  return axios.post<userObject>("/user/login", {
     username: username,
     password: pwd,
   });
@@ -23,7 +31,7 @@ export const userSignup = ({
   contact,
   password,
 }: SignupObject) => {
-  return axios.post("/user/signup", {
+  return axios.post<userObject>("/user/signup", {
     username: userName,
     fname: firstName,
     lname: lastName,
@@ -35,9 +43,21 @@ export const userSignup = ({
 };
 
 export const getHighscore = () => {
-  return axios.get("/highscore");
+  return axios.get<Array<HighscoresModel>>("/highscore");
 };
 
 export const getCategories = () => {
-  return axios.get("/category");
+  return axios.get<Array<CategoryModel>>("/category");
+};
+
+export const getQuestions = (
+  token: string,
+  tag: { category: string; level: string }
+) => {
+  return axios.get<{ questions: Array<QuestionModel> }>(
+    `/question?tags=${tag.category}&lvl=${tag.level}&length=${5}`,
+    {
+      headers: { authorization: token as string },
+    }
+  );
 };

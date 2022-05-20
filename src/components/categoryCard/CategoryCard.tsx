@@ -23,21 +23,21 @@ export const CategoryCard = ({
         <Link
           className="outline-btn play-btn-style text-dec-none"
           to="/rules"
-          state={{ category: category, level: "Easy" }}
+          state={{ category: category, level: "EASY" }}
         >
           Easy
         </Link>
         <Link
           className="outline-btn play-btn-style text-dec-none"
           to="/rules"
-          state={{ category: category, level: "Medium" }}
+          state={{ category: category, level: "MED" }}
         >
           Medium
         </Link>
         <Link
           className="outline-btn play-btn-style text-dec-none"
           to="/rules"
-          state={{ category: category, level: "Hard" }}
+          state={{ category: category, level: "HARD" }}
         >
           Hard
         </Link>

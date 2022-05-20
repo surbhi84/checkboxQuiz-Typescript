@@ -35,6 +35,10 @@
   background-color: var(--prim-col-li);
 }
 
+.d-none {
+  display: none;
+}
+
 .w-30 {
   width: 30%;
 }

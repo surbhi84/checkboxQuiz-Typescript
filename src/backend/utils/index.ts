@@ -1,18 +1,7 @@
-import {
-  UserModel,
-  UserResponse,
-} from 'backend/interfaces';
-import jwt_decode, { JwtDecodeOptions } from 'jwt-decode';
-import {
-  Registry,
-  Request,
-  Response,
-  Server,
-} from 'miragejs';
-import {
-  AnyFactories,
-  AnyModels,
-} from 'miragejs/-types';
+import { UserModel, UserResponse } from "backend/interfaces";
+import jwt_decode, { JwtDecodeOptions } from "jwt-decode";
+import { Registry, Request, Response, Server } from "miragejs";
+import { AnyFactories, AnyModels } from "miragejs/-types";
 
 export const requiresAuth = function (
   this: Server<Registry<AnyModels, AnyFactories>>,

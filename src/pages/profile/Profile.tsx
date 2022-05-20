@@ -1,13 +1,23 @@
-import { UserResponse } from "backend/interfaces";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth, setUser } from "userRedux";
+import { setAuth } from "userRedux";
 import { RootState } from "userRedux/store";
 
 export const Profile = () => {
   const dispatch = useDispatch();
+  const userInfo = useSelector((state: RootState) => {
+    return state.currentUser.user;
+  });
 
-  const userInfo = useSelector((state: RootState) => state.currentUser.user);
+  const userInfoData = [
+    { tag: "Total Score", value: userInfo.score },
+    {
+      tag: "Total quiz played",
+      value: userInfo.quizPlayed,
+    },
+
+    { tag: "Total correct answers", value: userInfo.correctAnswered },
+    { tag: "Total incorrect answers", value: userInfo.incorrectAnswered },
+  ];
 
   return (
     <div className="mv-l">
@@ -17,22 +27,26 @@ export const Profile = () => {
           alt="profile image"
           className="avatar-l circle-avatar"
         />
-        <p className="heading-text">{userInfo?.fname}</p>
+        <p className="heading-text">{userInfo.fname + " " + userInfo.lname}</p>
       </div>
 
       <div className="flex-center flex-col">
         <div className="flex-center spc-btwn w-30 w-50r bg-prim-li solid-btn ph-1 border-prim mg-xs">
           <p className="heading-text ">Recently played </p>
         </div>
-        {userInfo?.recentlyPlayed.map((item) => (
+
+        {userInfo.recentlyPlayed.map((item) => (
           <div
-            key={`${item.categoryId}+${item.level}`}
+            key={item.category.id + item.level}
             className="bg-prim-li-hover w-30 w-50r border-prim ph-1 mg-xs"
           >
-            <p className="heading-text">{item.categoryId}</p>
+            <p className="heading-text">
+              {item.category.title + " " + item.level}
+            </p>
           </div>
         ))}
-        {dummyData.map((i) => (
+
+        {userInfoData.map((i) => (
           <div
             key={i.tag}
             className="flex-row spc-btwn w-30 w-50r border-prim ph-1 mg-xs"
@@ -54,14 +68,3 @@ export const Profile = () => {
     </div>
   );
 };
-
-const dummyData = [
-  { tag: "Total Score", value: 30 },
-  {
-    tag: "Total quiz played",
-    value: 3,
-  },
-
-  { tag: "Total correct answers", value: 12 },
-  { tag: "Total incorrect answers", value: 3 },
-];

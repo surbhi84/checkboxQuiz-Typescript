@@ -30,7 +30,7 @@ export const categories: CategoryRaw[] = [
     ],
   },
   {
-    id: "123",
+    id: "13",
     title: "JS",
     description:
       "Take this quiz to test your JS skills, each set contains 5 questions having points according to the level you've chosen.",

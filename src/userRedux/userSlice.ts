@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserResponse } from "backend/interfaces";
 
-interface userObject {
+export interface userObject {
   encodedToken: string;
   user: UserResponse;
+  // isAuth: () => {};
 }
 
 const initialState: userObject = {

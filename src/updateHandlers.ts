@@ -10,7 +10,7 @@ export async function tokenLoginHandler(
 ) {
   try {
     const response = await getUser(token);
-    dispatch(setUser(response.data));
+    dispatch(setUser({ encodedToken: token, user: response.data.user }));
     dispatch(setAuth(true));
   } catch (err) {
     console.error(err);
@@ -25,7 +25,6 @@ export async function loginHandler(
   try {
     const response = await userLogin(username, pwd);
     dispatch(setUser(response.data));
-    console.log(response.data, "myresponse");
     dispatch(setAuth(true));
     localStorage.setItem("token", response.data.encodedToken);
   } catch (err) {

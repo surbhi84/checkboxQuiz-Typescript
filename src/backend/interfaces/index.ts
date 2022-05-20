@@ -14,7 +14,7 @@ export interface UserRaw {
   updatedAt: string;
   score: number;
   quizPlayed: number;
-  recentlyPlayed: Array<{ categoryId: string; level: Level }>;
+  recentlyPlayed: Array<{ category: CategoryRaw; level: Level }>;
   correctAnswered: number;
   incorrectAnswered: number;
   role: Role;
