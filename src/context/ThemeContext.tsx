@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface theme {
-  lightTheme: Boolean;
+  lightTheme: boolean;
   setTheme: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -16,6 +16,15 @@ export const ThemeContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [lightTheme, setTheme] = useState(true);
+
+  useEffect(() => {
+    if (localStorage.getItem("theme") === "false") {
+      setTheme(false);
+    } else {
+      setTheme(true);
+    }
+  }, []);
+
   return (
     <ThemeContext.Provider value={{ lightTheme, setTheme }}>
       {children}

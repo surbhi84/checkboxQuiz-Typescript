@@ -35,6 +35,17 @@
   background-color: var(--prim-col-li);
 }
 
+.bg-green-col {
+  background-color: var(--green-col);
+}
+.bg-red-col {
+  background-color: var(--red-col);
+}
+
+.d-none {
+  display: none;
+}
+
 .w-30 {
   width: 30%;
 }

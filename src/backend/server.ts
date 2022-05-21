@@ -1,10 +1,8 @@
 import { belongsTo, hasMany, Model, RestSerializer, Server } from "miragejs";
 
 import { getCategoriesHandler } from "./controllers/category.controller";
-import {
-  getHighscoresHandler,
-  getQuestionsHandler,
-} from "./controllers/question.controller";
+import { getHighscoresHandler } from "./controllers/highsocre.controller";
+import { getQuestionsHandler } from "./controllers/question.controller";
 import {
   getUserHandler,
   loginHandler,
@@ -47,6 +45,7 @@ export function makeServer({ environment = "development" } = {}) {
 
       users.forEach((userItem, index) => {
         let user = server.create("user", { ...userItem });
+
         if (index === 0) {
           questions.forEach((item) => {
             server.create("question", { ...item, creator: user });
@@ -66,13 +65,15 @@ export function makeServer({ environment = "development" } = {}) {
 
     routes() {
       this.namespace = "";
-      // this.timing = 10000;
       this.post("/user/signup", signupHandler.bind(this));
       this.post("/user/login", loginHandler.bind(this));
       this.get("/user", getUserHandler.bind(this));
-      this.get("/qs", getQuestionsHandler.bind(this));
       this.patch("/user", patchUserHandler.bind(this));
-      this.get("/hs", getHighscoresHandler.bind(this));
+
+      this.get("/question", getQuestionsHandler.bind(this));
+
+      //azad
+      this.get("/highscore", getHighscoresHandler.bind(this));
       this.get("/category", getCategoriesHandler.bind(this));
     },
   });

@@ -1,4 +1,4 @@
-export type Level = "EASY" | "MID" | "HARD";
+export type Level = "EASY" | "MED" | "HARD";
 export type Role = "ADMIN" | "PLAYER";
 export type CategoryType = "FEATURED" | "PERSONAL";
 export interface UserRaw {
@@ -14,7 +14,7 @@ export interface UserRaw {
   updatedAt: string;
   score: number;
   quizPlayed: number;
-  recentlyPlayed: Array<{ categoryId: string; level: Level }>;
+  recentlyPlayed: Array<{ category: CategoryRaw; level: Level }>;
   correctAnswered: number;
   incorrectAnswered: number;
   role: Role;
@@ -27,7 +27,7 @@ export interface QuestionRaw {
   "2": string;
   "3": string;
   correct_option: string;
-  tag: string[];
+  tags: string[];
   level: Level;
 }
 export interface CategoryRaw {
@@ -46,11 +46,11 @@ export interface HighscoresRaw {
   id: string;
   rank: number;
   username: string;
-  highscore: number;
+  score: number;
 }
 export interface UserModel extends UserRaw {
-  questionIds: string;
-  categoryIds: string;
+  questionIds: string[];
+  categoryIds: string[];
 }
 export interface QuestionModel extends QuestionRaw {
   creatorId: string;

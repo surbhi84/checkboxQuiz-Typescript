@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "userRedux";
 import { useThemeContext } from "context/ThemeContext";
 import { Header, Footer, Loader, AppRoutes } from "components";
 import { tokenLoginHandler } from "updateHandlers";
 import "./App.css";
+import { RootState } from "userRedux/store";
 
 function App() {
   const { lightTheme } = useThemeContext();
@@ -16,7 +17,7 @@ function App() {
       let token = localStorage.getItem("token");
       if (token !== null && token !== "") {
         try {
-          tokenLoginHandler(token, dispatch);
+          await tokenLoginHandler(token, dispatch);
         } catch (err) {
           console.error(err);
         } finally {

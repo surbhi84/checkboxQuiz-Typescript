@@ -11,7 +11,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 780px) {
   .category-container {
     margin: 2rem 0;
   }

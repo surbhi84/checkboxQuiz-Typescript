@@ -61,7 +61,7 @@ export const sample_requests: Array<{
     body: {},
     header: {
       authorization:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNqdGdzaGl2YW0ifQ.vzWhvz8B8qnFvMDCZ5euP7Dfh0cZLbCcoLsMdaraFQY",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cmJoaWt1a3JldGk5OSJ9.RGhSMsgXKhQe7cUhQ-4BF5EQKhJ_GDbuvMsgAx9noKU",
     },
   },
   {
@@ -73,8 +73,25 @@ export const sample_requests: Array<{
     body: {
       score: 7,
       quizPlayed: 55,
-      recentlyPlayed: 66,
-      // correctAnswered:77,
+      recentlyPlayed: [
+        {
+          category: {
+            id: "12",
+            title: "HTML",
+            description: "this is category for html",
+            image: "/gvh/ghvg",
+            category_type: "PERSONAL",
+            tags: ["HTML"],
+            timer_detail: [
+              { level: "EASY", time: 30 },
+              { level: "MED", time: 70 },
+              { level: "HARD", time: 90 },
+            ],
+          },
+          level: "EASY",
+        },
+      ],
+      correctAnswered: 77,
       incorrectAnswered: 88,
     },
     header: {
@@ -86,8 +103,8 @@ export const sample_requests: Array<{
     name: "qs",
     req_type: "GET",
     base_url: "",
-    url: "/qs",
-    query_str: "",
+    url: "/question",
+    query_str: "?tags=HTML,JS&lvl=EASY&length=5",
     body: {},
     header: {
       authorization:
@@ -95,10 +112,10 @@ export const sample_requests: Array<{
     },
   },
   {
-    name: "hs",
+    name: "highscore",
     req_type: "GET",
     base_url: "",
-    url: "/hs",
+    url: "/highscore",
     query_str: "",
     body: {},
     header: {

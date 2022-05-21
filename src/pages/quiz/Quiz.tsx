@@ -1,69 +1,90 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "userRedux/store";
+
+import { getQuestions } from "apiCalls";
+import { CategoryModel, Level, QuestionModel } from "backend/interfaces";
+import { QuestionCard } from "components";
 
 export const Quiz = () => {
-  const [stopWatch, setStopwatch] = useState<number>(30);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
-  const [selected, setSelected] = useState<string>();
+  const location = useLocation();
+
+  const { category, level, prev } =
+    (location.state as {
+      category: CategoryModel;
+      level: Level;
+      prev: string;
+    }) ?? {};
+
+  const navigate = useNavigate();
+  const [questions, setQuestions] = useState<Array<QuestionModel>>([]);
+  const [quesNum, setQuesNum] = useState(0);
+  const [userScore, setUserScore] = useState(0);
+  const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+  const user = useSelector((state: RootState) => state.currentUser);
+
+  function onVisibiltyChange() {
+    navigate("/results", {
+      state: {
+        prev: "/quiz",
+        userScore: userScore,
+        questionArray: questions,
+        quesNum: quesNum,
+        category: category,
+        selectedArr: selectedArr,
+      },
+    });
+  }
 
   useEffect(() => {
-    let id = setInterval(() => setStopwatch((p: number) => p - 1), 1000);
-    setIntervalId(id);
-    return () => clearInterval(id);
+    document.addEventListener("visibilitychange", onVisibiltyChange);
+    return () =>
+      document.removeEventListener("visibilitychange", onVisibiltyChange);
   }, []);
 
   useEffect(() => {
-    if (stopWatch === 0) {
-      clearInterval(intervalId);
-    }
-  }, [stopWatch]);
+    window.onbeforeunload = () => {
+      navigate("/");
+    };
+    return () => {
+      window.onbeforeunload = () => {};
+    };
+  }, []);
+
+  useEffect(() => {
+    (async function () {
+      const response = await getQuestions(user.encodedToken, {
+        category: category.title,
+        level: level,
+      });
+      setQuestions(response.data.questions);
+    })();
+  }, []);
+
+  const questionElements = questions?.map((ques, i) => (
+    <QuestionCard
+      ques={ques}
+      setQuesNum={setQuesNum}
+      quesNum={quesNum}
+      userScore={userScore}
+      setUserScore={setUserScore}
+      questions={questions}
+      category={category}
+      selectedArr={selectedArr}
+      setSelectedArr={setSelectedArr}
+    />
+  ));
 
   return (
-    <div className="flex-center flex-col mg-m">
-      <div className="circle-avatar bg-prim-li mg-s pd-xs">{stopWatch}s</div>
-
-      <div className="flex-col mg-xs flex-center">
-        <p className=" heading-text">
-          Q1-I am a question hasdjasdjakj ankjdsnda hdajksjdkas d oaijsdjasner
-          izxuciokzxj
-        </p>
-        <div className="flex-col gap-md">
-          <button
-            className="pd-xs play-btn outline-btn  text-center"
-            onClick={() => setSelected("Option One")}
-            disabled={stopWatch === 0}
-          >
-            Option One
-          </button>
-          <button
-            className="pd-xs play-btn outline-btn  text-center"
-            onClick={() => setSelected("Option two")}
-            disabled={stopWatch === 0}
-          >
-            Option two
-          </button>
-          <button
-            className="pd-xs play-btn outline-btn text-center"
-            onClick={() => setSelected("Option three")}
-            disabled={stopWatch === 0}
-          >
-            Option three
-          </button>
-          <button
-            className="pd-xs play-btn outline-btn  text-center"
-            onClick={() => setSelected("Option four")}
-            disabled={stopWatch === 0}
-          >
-            Option four
-          </button>
+    <>
+      {prev === "/rules" ? (
+        <div className="flex-center flex-col mg-m">
+          <>{questionElements[quesNum]}</>
         </div>
-      </div>
-      {/* implemented as link for now */}
-      <Link to={"/results"}>
-        <button className="bg-prim-li play-btn outline-btn btn-md mg-s">
-          Next
-        </button>
-      </Link>
-    </div>
+      ) : (
+        <Navigate to="/" />
+      )}
+    </>
   );
 };

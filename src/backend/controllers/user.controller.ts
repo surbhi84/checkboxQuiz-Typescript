@@ -140,7 +140,7 @@ export const getUserHandler = function (
       );
     }
 
-    return new Response(200, {}, user);
+    return new Response(200, {}, { user });
   } catch (error) {
     return new Response(
       500,
@@ -157,8 +157,6 @@ export const patchUserHandler = function (
   schema: Schema<Registry<AnyModels, AnyFactories>>,
   request: Request
 ) {
-  console.log("in for a call");
-
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -188,29 +186,54 @@ export const patchUserHandler = function (
     for (let [key, value] of Object.entries(reqBody)) {
       if (!isNaN(Number(value)))
         Object.assign(updateObject, { [key]: Number(value) });
-    }
-    // if(score){
-    // implement later
-    // }
 
+      const oldRecentlyPlayed = [
+        ...this.db.users.findBy({ username: user.username }).recentlyPlayed,
+      ];
+      const newRecentlyPlayed = [];
+
+      if (key === "recentlyPlayed") {
+        if (oldRecentlyPlayed.length === 3) {
+          recentlyPlayed.unshift(oldRecentlyPlayed[1], oldRecentlyPlayed[2]);
+        } else {
+          recentlyPlayed.unshift(...oldRecentlyPlayed);
+        }
+        Object.assign(updateObject, { [key]: recentlyPlayed });
+      }
+    }
     const updatedUser = this.db.users.update(
       { username: user.username },
       updateObject
     );
+    if (score !== undefined && score !== null && !isNaN(Number(score))) {
+      const highscores = [...this.db.highscores];
+      let presentUser = highscores.find((i) => i.username === user.username);
 
-    console.log(
-      {
-        score,
-        quizPlayed,
-        recentlyPlayed,
-        correctAnswered,
-        incorrectAnswered,
-      },
-      updatedUser,
-      "updated user"
-    );
+      if (score > highscores.find((user) => user.rank === 10).score) {
+        if (presentUser !== undefined)
+          this.db.highscores.remove({ rank: presentUser.rank });
+        else this.db.highscores.remove({ rank: 10 });
+        for (let i = 9; i >= 0; i--) {
+          if (
+            i != 0 &&
+            score > highscores.find((user) => user.rank === i).score
+          )
+            this.db.highscores.update({ rank: i }, { rank: i + 1 });
+          else {
+            this.create("highscore", {
+              id: uuid(),
+              rank: i + 1,
+              username: user.username,
+              score: score,
+              userId: user.id, //need to check this later from functional point of view
+            });
+            break;
+          }
+        }
+      }
+    }
 
-    return new Response(200, {}, updatedUser);
+    return new Response(200, {}, { user: updatedUser });
   } catch (error) {
     return new Response(
       500,

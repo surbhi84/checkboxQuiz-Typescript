@@ -33,7 +33,7 @@ export const Login = () => {
             <input
               type={isPwdVisible ? "text" : "password"}
               className="w15"
-              value={loginUsername}
+              value={loginPwd}
               onChange={(e) => setLoginPwd(e.target.value)}
             />
             {isPwdVisible ? (

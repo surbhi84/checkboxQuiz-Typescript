@@ -3,7 +3,6 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useThemeContext } from "context/ThemeContext";
 import "./header.css";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "userRedux/store";
 
@@ -36,7 +35,10 @@ export const Header = () => {
             <li>
               <button
                 className="themeBtn nav-link"
-                onClick={() => setTheme((p: Boolean) => !p)}
+                onClick={() => {
+                  localStorage.setItem("theme", (!lightTheme).toString());
+                  setTheme((p: boolean) => !p);
+                }}
               >
                 {lightTheme ? <MdDarkMode /> : <MdLightMode />}
               </button>
