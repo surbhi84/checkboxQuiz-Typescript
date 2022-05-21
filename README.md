@@ -4,14 +4,15 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
+   <h1 align="center">CheckBox</h1>
   <a href="https://github.com/surbhi84/checkboxQuiz-Typescript">
-<img width="225" alt=![Screenshot (22)](https://user-images.githubusercontent.com/56334321/162143729-d3d564f0-782d-42e2-b357-05fbd2d6615a.png)/>
+<img width="225" src="https://user-images.githubusercontent.com/56334321/169650629-a4eb9b24-307a-4663-bbb8-eb95785a0ddd.png" />
   </a>
 
-  <h1 align="center">CheckBox</h1>
+ 
 
   <p align="center">  
-CheckBox is a quiz app where you can test your knowledge for web developement.It porides you with various features such as a profile page ,highscore page and it has a timer as well. Made in a way so you don't cheat easily.Considering it's the beginning of the app there are three categories in the quiz i.e. HTML,JS and CSS. Each contains of three diffrent complexity levels.
+CheckBox is a quiz app where you can test your knowledge for web developement.It porides you with various features such as a profile page, highscore page and it has a timer as well. Made in a way so you don't cheat easily.Considering it's the beginning of the app there are three categories in the quiz i.e. HTML,JS and CSS. Each contains of three diffrent complexity levels.
     <br />
     <br />
     <a href="https://github.com/surbhi84/checkboxQuiz-Typescript"><strong>Explore the docs »</strong></a>
@@ -50,9 +51,9 @@ CheckBox is a quiz app where you can test your knowledge for web developement.It
 
 ## About The Project
 
-### Home Page!
+### Home Page
 
-[Screenshot (26)](https://user-images.githubusercontent.com/56334321/169649498-8c79d2ab-18ae-4d39-acbf-d519225a2701.png)
+![Screenshot (26)](https://user-images.githubusercontent.com/56334321/169649498-8c79d2ab-18ae-4d39-acbf-d519225a2701.png)
 
 The home page of checkBox welcomes you to the quiz and takes you to the categories page so you can get started with your quiz.You can access the navigation features from the home page.The navigation consists of a button for toggling persistent light modes, direct switch to categories page, a link for highscore page and one to login if you're not logged in else a link appears for the profile page.
 
@@ -61,6 +62,7 @@ The home page of checkBox welcomes you to the quiz and takes you to the categori
 ![Screenshot (29)](https://user-images.githubusercontent.com/56334321/169649562-1082604a-69d3-40f3-957c-9ef347816335.png)
 
 checkBox provides you a category page so you can decide from the options which quiz to play.Each category card has three difficulty levels and you can click on anyone and only the questions from that level will be asked to you.
+
 
 ## Features:
 
@@ -71,7 +73,7 @@ checkBox provides you a category page so you can decide from the options which q
 - CheckBox has a timer and after the expiration of it you can't change or select an option.
 - CheckBox supports persistent logins, you can logout and signup as well.
 - CheckBox has persistent dark and light modes.
-- checkBox has a highscore board which gets updated when you play a quiz.
+- CheckBox has a highscore board which gets updated when you play a quiz.
 - Besides home-page and category page all are protected routes and you must login to access them.
 
 
@@ -102,8 +104,6 @@ checkBox provides you a category page so you can decide from the options which q
 <!-- GETTING STARTED -->
 
 ## Getting Started
-
-
 
 ### Prerequisites
 
