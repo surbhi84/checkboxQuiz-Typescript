@@ -317,7 +317,7 @@ export const questions: QuestionRaw[] = [
   },
   {
     id: "12328",
-    statement: 'The "function" and " var" are known as..',
+    statement: 'The "function" and " var" are..',
     "0": "Declaration statements",
     "1": "Keywords",
     "2": "Data types",

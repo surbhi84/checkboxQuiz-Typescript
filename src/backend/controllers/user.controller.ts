@@ -190,7 +190,6 @@ export const patchUserHandler = function (
       const oldRecentlyPlayed = [
         ...this.db.users.findBy({ username: user.username }).recentlyPlayed,
       ];
-      const newRecentlyPlayed = [];
 
       if (key === "recentlyPlayed") {
         if (oldRecentlyPlayed.length === 3) {
@@ -210,24 +209,52 @@ export const patchUserHandler = function (
       let presentUser = highscores.find((i) => i.username === user.username);
 
       if (score > highscores.find((user) => user.rank === 10).score) {
-        if (presentUser !== undefined)
+        if (presentUser !== undefined) {
           this.db.highscores.remove({ rank: presentUser.rank });
-        else this.db.highscores.remove({ rank: 10 });
-        for (let i = 9; i >= 0; i--) {
-          if (
-            i != 0 &&
-            score > highscores.find((user) => user.rank === i).score
-          )
-            this.db.highscores.update({ rank: i }, { rank: i + 1 });
-          else {
+          if (presentUser.rank === 10 && highscores[9].score > score)
             this.create("highscore", {
               id: uuid(),
-              rank: i + 1,
+              rank: 10,
               username: user.username,
               score: score,
               userId: user.id, //need to check this later from functional point of view
             });
-            break;
+          else
+            for (let i = presentUser.rank - 1; i >= 0; i--) {
+              if (
+                i != 0 &&
+                score > highscores.find((user) => user.rank === i).score
+              )
+                this.db.highscores.update({ rank: i }, { rank: i + 1 });
+              else {
+                this.create("highscore", {
+                  id: uuid(),
+                  rank: i + 1,
+                  username: user.username,
+                  score: score,
+                  userId: user.id, //need to check this later from functional point of view
+                });
+                break;
+              }
+            }
+        } else {
+          this.db.highscores.remove({ rank: 10 });
+          for (let i = 9; i >= 0; i--) {
+            if (
+              i != 0 &&
+              score > highscores.find((user) => user.rank === i).score
+            )
+              this.db.highscores.update({ rank: i }, { rank: i + 1 });
+            else {
+              this.create("highscore", {
+                id: uuid(),
+                rank: i + 1,
+                username: user.username,
+                score: score,
+                userId: user.id, //need to check this later from functional point of view
+              });
+              break;
+            }
           }
         }
       }

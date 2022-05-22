@@ -71,17 +71,20 @@ export const QuestionCard = ({
     let incorrectAnsQuiz = quesNum + 1 - correctAnsQuiz;
     let incorrectAnswered = userInfo.user.incorrectAnswered + incorrectAnsQuiz;
 
-    const response = await patchUser(
-      token,
-      score,
-      quizPlayed,
-      category,
-      level,
-      correctAnswered,
-      incorrectAnswered
-    );
-
-    dispatch(setUser({ encodedToken: token, user: response.data.user[0] }));
+    try {
+      const response = await patchUser(
+        token,
+        score,
+        quizPlayed,
+        category,
+        level,
+        correctAnswered,
+        incorrectAnswered
+      );
+      dispatch(setUser({ encodedToken: token, user: response.data.user[0] }));
+    } catch (err) {
+      console.error(err, "something went wrong");
+    }
 
     navigate("/results", {
       state: {
@@ -90,7 +93,6 @@ export const QuestionCard = ({
         questionArray: questions,
         quesNum: quesNum,
         selectedArr: [...selectedArr, selected],
-        // category:category,
       },
       replace: true,
     });
