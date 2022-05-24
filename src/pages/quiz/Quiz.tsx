@@ -22,6 +22,7 @@ export const Quiz = () => {
   const [quesNum, setQuesNum] = useState(0);
   const [userScore, setUserScore] = useState(0);
   const [selectedArr, setSelectedArr] = useState<Array<string>>([]);
+  const [time, setTime] = useState(NaN);
   const user = useSelector((state: RootState) => state.currentUser);
 
   function onVisibiltyChange() {
@@ -52,6 +53,11 @@ export const Quiz = () => {
     };
   }, []);
 
+  interface timerDetails {
+    level: Level;
+    time: number;
+  }
+
   useEffect(() => {
     (async function () {
       const response = await getQuestions(user.encodedToken, {
@@ -59,6 +65,10 @@ export const Quiz = () => {
         level: level,
       });
       setQuestions(response.data.questions);
+      const timerDet = category.timer_detail.find(
+        (i) => i.level === level
+      ) as timerDetails;
+      setTime(timerDet?.time);
     })();
   }, []);
 
@@ -73,6 +83,7 @@ export const Quiz = () => {
       category={category}
       selectedArr={selectedArr}
       setSelectedArr={setSelectedArr}
+      time={time}
     />
   ));
 

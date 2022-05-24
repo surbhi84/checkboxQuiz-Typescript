@@ -4,16 +4,21 @@ import "./rules.css";
 
 export const Rules = () => {
   const location = useLocation();
-  const { category = {}, level = "" } =
+  const { category = {} as CategoryModel, level = "" } =
     (location.state as {
       category: CategoryModel;
       level: Level;
-    }) ?? {};
+    }) ??
+    ({} as {
+      category: CategoryModel;
+      level: Level;
+    });
+  const quizCategory = category?.timer_detail.find((i) => i.level === level);
 
   return (
     <>
       {
-        category === {} || level === "" ? (
+        level === "" ? (
           <Navigate to="/" />
         ) : (
           //  <!-- Rules div -->
@@ -21,34 +26,34 @@ export const Rules = () => {
             <h2 className="prim-text marg-un">checkBox Rules</h2>
             {/* <!-- Rules --> */}
             <ol className="pd-l-none">
-              <li className="mg-xs">Each question is worth 10 points.</li>
-
+              <li className="mg-xs">Each question is worth 5 points.</li>
+              <li className="mg-xs">There is no negative marking.</li>
               <li className="mg-xs">
                 Only one answer can be selected for each question.
               </li>
 
-              <li className="mg-xs">
-                There is no negative marking for wrong answers.
-              </li>
-
-              <li className="mg-xs">
-                You will get 30 seconds for answering a easy level question, 45
-                seconds for a medium level question and one minute for the hard
-                level.
-              </li>
+              {Object.keys(category).length !== 0 && (
+                <li className="mg-xs">
+                  You will get {quizCategory?.time} seconds for answering each
+                  question.
+                </li>
+              )}
 
               <li className="mg-xs">
                 Once the timer expires you can't change your response.
               </li>
+              <li className="mg-xs">
+                Do not refresh or you will be disqualified from the quiz.
+              </li>
 
+              <li className="mg-xs">
+                Quit will redirect you results page only and won't negate your
+                progess.
+              </li>
               <li className="mg-xs">
                 You shouldn't switch tabs or windows, that will take you
                 directly to results page with the marking for attempted
                 questions.
-              </li>
-
-              <li className="mg-xs">
-                Do not refresh or you will be disqualified from the quiz.
               </li>
             </ol>
             <label>
