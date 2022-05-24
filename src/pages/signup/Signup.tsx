@@ -4,6 +4,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useSignupReducer } from "./signupReducer";
 import { useDispatch } from "react-redux";
 import { signupHandler } from "updateHandlers";
+import "./signup.css";
 
 export const Signup = () => {
   const [isPwdVisible, setIsPwdVisible] = useState(false);
@@ -14,7 +15,7 @@ export const Signup = () => {
   return (
     <div className="flex-center mv-xl">
       <div className="flex-center flex-col mg-m">
-        <div className="flex-row">
+        <div className="signup-div">
           <label className="mg-xs flex-col">
             First Name
             <input
@@ -36,7 +37,7 @@ export const Signup = () => {
             />
           </label>
         </div>
-        <div className="flex-row">
+        <div className="signup-div">
           <label className="mg-xs flex-col">
             Username
             <input
@@ -59,7 +60,7 @@ export const Signup = () => {
           </label>
         </div>
 
-        <div className="flex-row">
+        <div className="signup-div">
           <label className="mg-xs flex-col">
             Email
             <input
@@ -84,7 +85,7 @@ export const Signup = () => {
             />
           </label>
         </div>
-        <div className="flex-row">
+        <div className="signup-div">
           <label className="mg-xs flex-col">
             Password
             <div className="flex-row input-eye-holder">
@@ -155,7 +156,7 @@ export const Signup = () => {
 
       <img
         src="/assets/images/signup.svg"
-        className="flex-center w-30 md-display-none"
+        className="flex-center w-30 lg-display-none"
       />
     </div>
   );

@@ -1,0 +1,16 @@
+.signup-div {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 640px) {
+  .signup-div {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 780px) {
+  .lg-display-none {
+    display: none;
+  }
+}
