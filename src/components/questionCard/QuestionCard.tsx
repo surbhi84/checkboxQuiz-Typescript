@@ -37,17 +37,6 @@ export const QuestionCard = ({
 }) => {
   const navigate = useNavigate();
 
-  // interface timerDetails {
-  //   level: Level;
-  //   time: number;
-  // }
-
-  // const timerDet = category.timer_detail.find(
-  //   (i) => i.level === level
-  // ) as timerDetails;
-
-  // console.log(timerDet);
-
   const [selected, setSelected] = useState<string>();
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
   const [stopWatch, setStopwatch] = useState<number>(time);
