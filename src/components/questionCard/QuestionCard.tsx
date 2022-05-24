@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { CategoryModel, QuestionModel } from "backend/interfaces";
+import {
+  CategoryModel,
+  CategoryType,
+  Level,
+  QuestionModel,
+} from "backend/interfaces";
 import { getCategories, getUser, patchUser } from "apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "userRedux/store";
@@ -17,6 +22,7 @@ export const QuestionCard = ({
   category,
   selectedArr,
   setSelectedArr,
+  time,
 }: {
   ques: QuestionModel;
   userScore: number;
@@ -27,12 +33,15 @@ export const QuestionCard = ({
   category: CategoryModel;
   selectedArr: Array<string>;
   setSelectedArr: React.Dispatch<React.SetStateAction<string[]>>;
+  time: number;
 }) => {
   const navigate = useNavigate();
+
   const [selected, setSelected] = useState<string>();
   const [intervalId, setIntervalId] = useState<NodeJS.Timer>();
-  const [stopWatch, setStopwatch] = useState<number>(30);
+  const [stopWatch, setStopwatch] = useState<number>(time);
   const userInfo = useSelector((state: RootState) => state.currentUser);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,7 +60,7 @@ export const QuestionCard = ({
     setSelectedArr((p) => [...p, selected ?? "4"]);
     setQuesNum((p) => (p <= 5 ? p + 1 : p));
     setSelected("4");
-    setStopwatch(30);
+    setStopwatch(time);
 
     if (selected === ques.correct_option) {
       setUserScore((p) => p + 5);
@@ -59,29 +68,32 @@ export const QuestionCard = ({
   }
 
   async function quitBtnHandler() {
+    let level = ques.level;
     let token = userInfo.encodedToken;
     userScore = selected === ques.correct_option ? userScore + 5 : userScore;
     let score = userInfo.user.score + userScore;
     let quizPlayed =
       quesNum > 0 ? userInfo.user.quizPlayed + 1 : userInfo.user.quizPlayed;
 
-    let level = ques.level;
     let correctAnsQuiz = userScore / 5;
     let correctAnswered = userInfo.user.correctAnswered + correctAnsQuiz;
     let incorrectAnsQuiz = quesNum + 1 - correctAnsQuiz;
     let incorrectAnswered = userInfo.user.incorrectAnswered + incorrectAnsQuiz;
 
-    const response = await patchUser(
-      token,
-      score,
-      quizPlayed,
-      category,
-      level,
-      correctAnswered,
-      incorrectAnswered
-    );
-
-    dispatch(setUser({ encodedToken: token, user: response.data.user[0] }));
+    try {
+      const response = await patchUser(
+        token,
+        score,
+        quizPlayed,
+        category,
+        level,
+        correctAnswered,
+        incorrectAnswered
+      );
+      dispatch(setUser({ encodedToken: token, user: response.data.user[0] }));
+    } catch (err) {
+      console.error(err, "something went wrong");
+    }
 
     navigate("/results", {
       state: {
@@ -90,7 +102,6 @@ export const QuestionCard = ({
         questionArray: questions,
         quesNum: quesNum,
         selectedArr: [...selectedArr, selected],
-        // category:category,
       },
       replace: true,
     });

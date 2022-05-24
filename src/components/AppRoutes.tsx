@@ -17,7 +17,6 @@ import {
 export const AppRoutes = () => {
   return (
     <div>
-      <Link to="/test">Test</Link>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
