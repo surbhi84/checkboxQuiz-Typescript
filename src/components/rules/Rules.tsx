@@ -57,9 +57,6 @@ export const Rules = () => {
                 questions.
               </li>
             </ol>
-            <label>
-              <input type="checkbox" />I agree to checkBox Rules.
-            </label>
 
             <div className="mg-s prim-text">
               Have fun learning and enjoy the quiz 😄

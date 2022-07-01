@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setAuth } from "userRedux";
 import { useThemeContext } from "context/ThemeContext";
 import { Header, Footer, Loader, AppRoutes } from "components";

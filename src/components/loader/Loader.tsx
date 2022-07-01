@@ -1,8 +1,14 @@
-import React from "react";
+import { useThemeContext } from "context/ThemeContext";
 import "./loader.css";
 export const Loader = () => {
+  const { lightTheme } = useThemeContext();
+
   return (
-    <div className="flex-row flex-center App-logo">
+    <div
+      className={`flex-row flex-center App-logo ${
+        lightTheme ? "light" : "dark"
+      }`}
+    >
       <img
         src="/assets/icon/box.svg"
         alt="Profile icon"

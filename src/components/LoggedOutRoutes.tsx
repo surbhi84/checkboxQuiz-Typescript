@@ -7,7 +7,7 @@ export const LoggedOutRoutes = () => {
   const isAuth = useSelector((state: RootState) => state.isAuth);
   const location = useLocation();
 
-  const { category, level } =
+  const state =
     (
       location.state as {
         state: {
@@ -31,7 +31,13 @@ export const LoggedOutRoutes = () => {
 
   return !isAuth ? (
     <Outlet />
+  ) : location.state !== undefined && state !== undefined ? (
+    <Navigate
+      to={from}
+      state={{ category: state.category, level: state.level }}
+      replace={true}
+    />
   ) : (
-    <Navigate to={from} state={{ category, level }} replace={true} />
+    <Navigate to={from} replace={true} />
   );
 };

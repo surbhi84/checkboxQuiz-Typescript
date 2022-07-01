@@ -8,8 +8,11 @@
   color: var(--prim-col);
 }
 
+.footer-link {
+  transform: scale(1.2);
+}
 .footer-link:hover {
-  transform: scale(1.1);
+  transform: scale(1.4);
   transition: transform 0.2s;
 }
 

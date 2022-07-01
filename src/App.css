@@ -31,6 +31,10 @@
   color: var(--prim-col);
 }
 
+.li-text {
+  color: var(--prim-col-li);
+}
+
 .bg-prim-li {
   background-color: var(--prim-col-li);
 }

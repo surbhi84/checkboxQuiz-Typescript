@@ -11,7 +11,7 @@ export const Header = () => {
   const isAuth = useSelector((state: RootState) => state.isAuth);
 
   return (
-    <div>
+    <div className={`${lightTheme ? "light" : "dark"} `}>
       {/* <!-- header --> */}
       <header className="nav-head">
         {/* <!-- logo --> */}
@@ -34,7 +34,7 @@ export const Header = () => {
           <ul className="nav-links">
             <li>
               <button
-                className="themeBtn nav-link"
+                className={`themeBtn nav-link ${lightTheme ? "" : "li-text"}`}
                 onClick={() => {
                   localStorage.setItem("theme", (!lightTheme).toString());
                   setTheme((p: boolean) => !p);
@@ -46,7 +46,9 @@ export const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? "nav-link nav-link-active" : "nav-link"
+                  isActive
+                    ? `nav-link nav-link-active `
+                    : `nav-link ${lightTheme ? "" : "li-text"}`
                 }
                 to="/categories"
               >
@@ -56,7 +58,9 @@ export const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? "nav-link nav-link-active" : "nav-link"
+                  isActive
+                    ? `nav-link nav-link-active `
+                    : `nav-link ${lightTheme ? "" : "li-text"}`
                 }
                 to="/highscores"
               >

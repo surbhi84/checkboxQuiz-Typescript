@@ -23,11 +23,13 @@
 .nav-link:hover {
   background-color: var(--prim-col-li);
   transition: background-color 1s;
+  color: var(--blk);
 }
 
 .nav-link-active {
   background-color: var(--prim-col-li);
   text-decoration: none;
+  color: var(--blk);
 }
 
 .themeBtn {
