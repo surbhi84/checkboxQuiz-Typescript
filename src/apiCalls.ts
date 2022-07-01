@@ -6,7 +6,7 @@ import {
   QuestionModel,
   UserResponse,
 } from "backend/interfaces";
-import { Category } from "pages";
+
 import { SignupObject } from "pages/signup/signupReducer";
 import { userObject } from "userRedux/userSlice";
 

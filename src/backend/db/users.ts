@@ -3,6 +3,7 @@ import { UserRaw } from "backend/interfaces";
 import { getCurrentDateTime } from "../utils";
 
 export const users: UserRaw[] = [
+  //  1
   {
     id: "666",
     fname: "Surbhi",
@@ -73,6 +74,7 @@ export const users: UserRaw[] = [
     incorrectAnswered: 30,
     role: "ADMIN",
   },
+  // 2
   {
     id: "667",
     fname: "Rajeev",
@@ -84,7 +86,7 @@ export const users: UserRaw[] = [
     email: "rajv@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
-    score: 60,
+    score: 85,
     quizPlayed: 10,
     recentlyPlayed: [
       {
@@ -143,6 +145,7 @@ export const users: UserRaw[] = [
     incorrectAnswered: 40,
     role: "ADMIN",
   },
+  // 3
   {
     id: "611",
     fname: "Lakshmi",
@@ -154,7 +157,7 @@ export const users: UserRaw[] = [
     email: "rlax@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
-    score: 50,
+    score: 90,
     quizPlayed: 10,
     recentlyPlayed: [
       {
@@ -213,6 +216,7 @@ export const users: UserRaw[] = [
     incorrectAnswered: 0,
     role: "PLAYER",
   },
+  // 4
   {
     id: "6155",
     fname: "Snehal",
@@ -224,7 +228,7 @@ export const users: UserRaw[] = [
     email: "ss@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
-    score: 87,
+    score: 90,
     quizPlayed: 7,
     recentlyPlayed: [
       {
@@ -283,6 +287,7 @@ export const users: UserRaw[] = [
     incorrectAnswered: 10,
     role: "PLAYER",
   },
+  // 5
   {
     id: "68855",
     fname: "Vikram",
@@ -294,7 +299,7 @@ export const users: UserRaw[] = [
     email: "vks@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
-    score: 43,
+    score: 95,
     quizPlayed: 13,
     recentlyPlayed: [
       {
@@ -353,6 +358,7 @@ export const users: UserRaw[] = [
     incorrectAnswered: 12,
     role: "PLAYER",
   },
+  // 6
   {
     id: "78855",
     fname: "Dhruv",
@@ -364,7 +370,7 @@ export const users: UserRaw[] = [
     email: "drvs@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
-    score: 42,
+    score: 110,
     quizPlayed: 14,
     recentlyPlayed: [
       {
@@ -423,6 +429,7 @@ export const users: UserRaw[] = [
     incorrectAnswered: 58,
     role: "PLAYER",
   },
+  // 7
   {
     id: "788535",
     fname: "Deepak",
@@ -434,7 +441,7 @@ export const users: UserRaw[] = [
     email: "deep@gmail.com",
     createdAt: getCurrentDateTime(),
     updatedAt: getCurrentDateTime(),
-    score: 80,
+    score: 110,
     quizPlayed: 4,
     recentlyPlayed: [
       {

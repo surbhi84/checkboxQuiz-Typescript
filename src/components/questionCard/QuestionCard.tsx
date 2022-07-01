@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {
-  CategoryModel,
-  CategoryType,
-  Level,
-  QuestionModel,
-} from "backend/interfaces";
-import { getCategories, getUser, patchUser } from "apiCalls";
+import { CategoryModel, QuestionModel } from "backend/interfaces";
+import { patchUser } from "apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "userRedux/store";
 import { setUser } from "userRedux";
@@ -70,12 +65,13 @@ export const QuestionCard = ({
   async function quitBtnHandler() {
     let level = ques.level;
     let token = userInfo.encodedToken;
-    userScore = selected === ques.correct_option ? userScore + 5 : userScore;
-    let score = userInfo.user.score + userScore;
+    let localUserScore =
+      selected === ques.correct_option ? userScore + 5 : userScore;
+    let score = userInfo.user.score + localUserScore;
     let quizPlayed =
       quesNum > 0 ? userInfo.user.quizPlayed + 1 : userInfo.user.quizPlayed;
 
-    let correctAnsQuiz = userScore / 5;
+    let correctAnsQuiz = localUserScore / 5;
     let correctAnswered = userInfo.user.correctAnswered + correctAnsQuiz;
     let incorrectAnsQuiz = quesNum + 1 - correctAnsQuiz;
     let incorrectAnswered = userInfo.user.incorrectAnswered + incorrectAnsQuiz;
@@ -90,6 +86,7 @@ export const QuestionCard = ({
         correctAnswered,
         incorrectAnswered
       );
+
       dispatch(setUser({ encodedToken: token, user: response.data.user[0] }));
     } catch (err) {
       console.error(err, "something went wrong");
@@ -98,7 +95,7 @@ export const QuestionCard = ({
     navigate("/results", {
       state: {
         prev: "/quiz",
-        userScore: userScore,
+        userScore: localUserScore,
         questionArray: questions,
         quesNum: quesNum,
         selectedArr: [...selectedArr, selected],

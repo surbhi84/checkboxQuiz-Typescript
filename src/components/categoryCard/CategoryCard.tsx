@@ -11,6 +11,7 @@ export const CategoryCard = ({ category }: { category: CategoryModel }) => {
         alt={`${category} category image`}
         className="responsive-img"
       />
+
       {/* <!-- redirecting links designed as buttons in category card --> */}
       <div className="flex-row gap-sm pd-xs">
         <Link
@@ -20,6 +21,7 @@ export const CategoryCard = ({ category }: { category: CategoryModel }) => {
         >
           Easy
         </Link>
+
         <Link
           className="outline-btn play-btn-style text-dec-none"
           to="/rules"
@@ -27,6 +29,7 @@ export const CategoryCard = ({ category }: { category: CategoryModel }) => {
         >
           Medium
         </Link>
+
         <Link
           className="outline-btn play-btn-style text-dec-none"
           to="/rules"

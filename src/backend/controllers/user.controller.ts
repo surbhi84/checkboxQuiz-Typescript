@@ -200,21 +200,24 @@ export const patchUserHandler = function (
         Object.assign(updateObject, { [key]: recentlyPlayed });
       }
     }
+
     const updatedUser = this.db.users.update(
       { username: user.username },
       updateObject
     );
+
     if (score !== undefined && score !== null && !isNaN(Number(score))) {
       const highscores = [...this.db.highscores];
       let presentUser = highscores.find((i) => i.username === user.username);
 
-      if (score > highscores.find((user) => user.rank === 10).score) {
+      if (score > highscores.find((user) => user.rank === 7).score) {
         if (presentUser !== undefined) {
           this.db.highscores.remove({ rank: presentUser.rank });
-          if (presentUser.rank === 10 && highscores[9].score > score)
+
+          if (presentUser.rank === 7 && highscores[6].score > score)
             this.create("highscore", {
               id: uuid(),
-              rank: 10,
+              rank: 7,
               username: user.username,
               score: score,
               userId: user.id, //need to check this later from functional point of view
@@ -238,8 +241,8 @@ export const patchUserHandler = function (
               }
             }
         } else {
-          this.db.highscores.remove({ rank: 10 });
-          for (let i = 9; i >= 0; i--) {
+          this.db.highscores.remove({ rank: 7 });
+          for (let i = 6; i >= 0; i--) {
             if (
               i != 0 &&
               score > highscores.find((user) => user.rank === i).score

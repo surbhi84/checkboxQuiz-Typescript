@@ -13,6 +13,7 @@ export const Rules = () => {
       category: CategoryModel;
       level: Level;
     });
+
   const quizCategory = category?.timer_detail.find((i) => i.level === level);
 
   return (

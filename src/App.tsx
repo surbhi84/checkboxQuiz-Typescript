@@ -5,7 +5,6 @@ import { useThemeContext } from "context/ThemeContext";
 import { Header, Footer, Loader, AppRoutes } from "components";
 import { tokenLoginHandler } from "updateHandlers";
 import "./App.css";
-import { RootState } from "userRedux/store";
 
 function App() {
   const { lightTheme } = useThemeContext();
